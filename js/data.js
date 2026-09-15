@@ -91,15 +91,9 @@ window.SUKNA_DATA = {
     {icon:'🚒', name:'Balai Bomba Serdang', phone:'03-8941 6281', distance:'7.2 km'}
   ],
   protocol: [
-    ['Susun VVIP/VIP Pembukaan','assets/official/susun-vvip-pembukaan.webp'],
     ['Susun Atur Majlis Pembukaan','assets/official/susun-atur-pembukaan.webp'],
     ['Susun Atur Perbarisan','assets/official/perbarisan.webp'],
-    ['Tempat Makan VVIP/VIP Pembukaan','assets/official/makan-vvip-pembukaan.webp'],
     ['Lokasi Dewan Besar','assets/official/lokasi-dewan-besar.webp'],
-    ['Susun Atur Majlis Penutup','assets/official/susun-atur-penutup.webp'],
-    ['Meja VVIP/VIP Penutup - Alt 1','assets/official/meja-vvip-penutup-1.webp'],
-    ['Meja VVIP/VIP Penutup - Alt 2','assets/official/meja-vvip-penutup-2.webp'],
-    ['Pentas VVIP - Alt 1','assets/official/pentas-vvip-1.webp'],
-    ['Pentas VVIP - Alt 2','assets/official/pentas-vvip-2.webp']
+    ['Susun Atur Majlis Penutup','assets/official/susun-atur-penutup.webp']
   ]
 };
