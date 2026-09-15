@@ -1,6 +1,6 @@
 # Portal Utama SUKNA XXI Selangor 2026
 
-Portal statik, mobile-first dan sedia untuk GitHub Pages. Kandungan utama dibina berasaskan dokumen **INFO PENUH SUKNA-21 SELANGOR.pdf** dan telah diselaraskan dengan **ATURCARA PENUH SUKNA21.pdf**.
+Portal statik, mobile-first dan sedia untuk GitHub Pages. Kandungan portal telah diselaraskan dengan maklumat rasmi SUKNA XXI Selangor 2026 dan aturcara penuh kejohanan.
 
 ## Kandungan portal
 - Hero + countdown acara 17-20 September 2026
@@ -13,7 +13,7 @@ Portal statik, mobile-first dan sedia untuk GitHub Pages. Kandungan utama dibina
 - Majlis pembukaan & penutup
 - Galeri pelan operasi/protokol
 - Nombor kecemasan satu sentuhan
-- Pautan PDF rasmi, jadual perlawanan dan cabutan bertuah
+- Jadual perlawanan, pelan lokasi, aturcara visual dan cabutan bertuah
 - PWA asas (boleh Add to Home Screen; cache halaman utama)
 
 ## Cara guna di GitHub Pages
@@ -30,4 +30,3 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 ## Nota kandungan rasmi
 - Susunan VVIP/VIP dan maklumat protokol dalam slaid adalah tertakluk kepada pengesahan kehadiran.
 - Jadual harian portal telah diselaraskan dengan Aturcara Penuh SUKNA21. Nota rasmi menyatakan sebarang perubahan masa akan dimaklumkan oleh urus setia dari masa ke semasa.
-- Kedua-dua PDF rujukan utama disertakan dalam `assets/`, termasuk `ATURCARA-PENUH-SUKNA21.pdf`.

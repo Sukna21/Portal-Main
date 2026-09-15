@@ -1,6 +1,6 @@
-const CACHE='sukna21-v4-20260915-timefix';
+const CACHE='sukna21-v6-20260915-nopdf';
 const CORE=[
-  './','./index.html','./css/style.css?v=20260915d','./js/data.js?v=20260915d','./js/app.js?v=20260915d',
+  './','./index.html','./css/style.css?v=20260915e','./js/data.js?v=20260915e','./js/app.js?v=20260915e',
   './assets/sukna-logo.webp','./assets/mascot.webp','./assets/partners-strip.webp',
   './assets/ui/official-cover.webp','./assets/ui/stadium-page.webp','./assets/ui/accom-page.webp','./assets/icons/sepak-takraw.svg','./assets/official/aturcara-penuh.webp'
 ];
