@@ -105,6 +105,21 @@
   // Protocol gallery
   $('#protocolGallery').innerHTML = D.protocol.map(([name,src])=>`<a href="${src}" target="_blank" rel="noopener"><img loading="lazy" src="${src}" alt="${name}"><span>${name}</span></a>`).join('');
 
+
+  // Live Google Sheet results
+  const resultsSheet = $('#resultsSheet');
+  const sheetLoading = $('#sheetLoading');
+  const resultsRefresh = $('#resultsRefresh');
+  if(resultsSheet){
+    resultsSheet.addEventListener('load', () => sheetLoading?.classList.add('hide'));
+    resultsRefresh?.addEventListener('click', () => {
+      sheetLoading?.classList.remove('hide');
+      const url = new URL(resultsSheet.src);
+      url.searchParams.set('_r', Date.now());
+      resultsSheet.src = url.toString();
+    });
+  }
+
   // PWA install
   let deferredPrompt;
   const installBtn=$('#installBtn');
