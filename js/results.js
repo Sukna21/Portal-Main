@@ -32,11 +32,24 @@
   }
 
   const SPREADSHEET_ID = '1qiRF16JhUlDBV9ZvoO6YhA5JnCbjqFcs';
-  const FALLBACK_SHEETS = [
-    { title:'Keseluruhan', gid:'1766800443' }
+  const SHEET_META = [
+    { title:'Jadual Umum', gid:'1766800443', icon:'▦', short:'Umum' },
+    { title:'Bola Sepak', gid:'1303193966', icon:'⚽', short:'Bola Sepak' },
+    { title:'Bola Jaring', gid:'903650058', icon:'🥅', short:'Bola Jaring' },
+    { title:'Bola Tampar Lelaki', gid:'979601248', icon:'🏐', short:'Tampar L' },
+    { title:'Bola Tampar Wanita', gid:'1738590806', icon:'🏐', short:'Tampar W' },
+    { title:'Futsal Lelaki', gid:'1041379431', icon:'⚽', short:'Futsal L' },
+    { title:'Futsal Wanita', gid:'897313832', icon:'⚽', short:'Futsal W' },
+    { title:'Badminton Berpasukan', gid:'1105793258', icon:'🏸', short:'Badminton' },
+    { title:'Karom Berpasukan', gid:'91010045', icon:'♟', short:'Karom' },
+    { title:'Dart Berpasukan', gid:'1631672342', icon:'🎯', short:'Dart' },
+    { title:'Sepak Takraw Regu', gid:'1526261777', icon:'◉', short:'Takraw' },
+    { title:'Ping Pong Berpasukan', gid:'251106998', icon:'🏓', short:'Ping Pong' },
+    { title:'Tarik Tali (680KG)', gid:'303215215', icon:'🪢', short:'Tarik Tali 680' },
+    { title:'Tarik Tali (Freeweight)', gid:'475871147', icon:'🪢', short:'Freeweight' }
   ];
-  // Jika mahu, tambah gid manual di sini untuk tab-tab tertentu.
-  const MANUAL_SHEETS = [];
+  const FALLBACK_SHEETS = SHEET_META;
+  const MANUAL_SHEETS = SHEET_META;
 
   const els = {
     docName: $('#docName'),
@@ -45,6 +58,7 @@
     sheetTabs: $('#sheetTabs'),
     sheetTabsInfo: $('#sheetTabsInfo'),
     sportChipBar: $('#sportChipBar'),
+    dateChipBar: $('#dateChipBar'),
     featuredMatchGrid: $('#featuredMatchGrid'),
     resultsCardWall: $('#resultsCardWall'),
     resultsCountInfo: $('#resultsCountInfo'),
@@ -60,6 +74,7 @@
   let workbookSheets = [];
   let activeSheet = null;
   let activeSport = '';
+  let activeDate = '';
   let allRecords = [];
 
   const stripHtml = s => String(s || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -131,15 +146,19 @@
   }
 
   function renderSheetTabs(){
-    els.sheetTabs.innerHTML = workbookSheets.map((sheet, i) => `<button class="sheet-tab-btn ${activeSheet?.gid === sheet.gid ? 'active' : ''}" data-gid="${sheet.gid}" data-title="${sheet.title}">${i+1}. ${sheet.title}</button>`).join('');
-    els.sheetTabsInfo.textContent = workbookSheets.length > 1
-      ? `Sebanyak ${workbookSheets.length} tab berjaya dikesan dan boleh ditukar terus dari portal.`
-      : 'Buat masa ini sekurang-kurangnya satu tab utama berjaya dipautkan.';
+    els.sheetTabs.innerHTML = workbookSheets.map((sheet, i) => `<button class="sheet-tab-btn ${activeSheet?.gid === sheet.gid ? 'active' : ''}" data-gid="${sheet.gid}" data-title="${sheet.title}"><span class="sheet-sport-icon">${sheet.icon || '●'}</span><span><b>${sheet.short || sheet.title}</b><small>${sheet.title}</small></span></button>`).join('');
+    els.sheetTabsInfo.textContent = `${workbookSheets.length} kategori pertandingan dipautkan terus ke dokumen rasmi.`;
   }
 
   function renderSportChips(rows){
     const sports = uniq(rows.map(r => r.sport)).sort((a,b) => a.localeCompare(b,'ms'));
     els.sportChipBar.innerHTML = `<button class="sport-chip ${activeSport === '' ? 'active' : ''}" data-sport="">Semua</button>` + sports.map(s => `<button class="sport-chip ${activeSport === s ? 'active' : ''}" data-sport="${s}">${s}</button>`).join('');
+  }
+
+  function renderDateChips(rows){
+    const dates = uniq(rows.map(r => r.date)).filter(Boolean);
+    els.dateChipBar.innerHTML = `<button class="date-chip ${activeDate === '' ? 'active' : ''}" data-date="">Semua Tarikh</button>` + dates.map(d => `<button class="date-chip ${activeDate === d ? 'active' : ''}" data-date="${d}">${d}</button>`).join('');
+    els.dateChipBar.hidden = dates.length === 0;
   }
 
   function findHeader(headers, patterns, opts={}){
@@ -295,6 +314,7 @@
     const status = els.statusFilter.value || '';
     return allRecords.filter(r =>
       (!activeSport || r.sport === activeSport) &&
+      (!activeDate || r.date === activeDate) &&
       (!status || r.statusKey === status) &&
       (!q || r.searchBlob.includes(q))
     );
@@ -374,6 +394,7 @@
     activeSheet = sheet;
     allRecords = [];
     activeSport = '';
+    activeDate = '';
     showLoading(true);
     showError(false);
     els.activeSheetName.textContent = sheet.title;
@@ -383,6 +404,7 @@
       if (!resp || resp.status === 'error' || !resp.table) throw new Error('Invalid gviz response');
       allRecords = buildRecords(resp.table, sheet.title);
       renderSportChips(allRecords);
+      renderDateChips(allRecords);
       renderRows();
       els.sheetLastUpdate.textContent = 'Dikemas kini ' + new Date().toLocaleTimeString('ms-MY', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
       showLoading(false);
@@ -393,6 +415,7 @@
       showError(true);
       allRecords = [];
       renderSportChips([]);
+      renderDateChips([]);
       renderRows();
       els.sheetLastUpdate.textContent = 'Gagal memuatkan data';
     }
@@ -411,14 +434,21 @@
     renderSportChips(allRecords);
     renderRows();
   });
+  els.dateChipBar.addEventListener('click', e => {
+    const btn = e.target.closest('.date-chip');
+    if (!btn) return;
+    activeDate = btn.dataset.date || '';
+    renderDateChips(allRecords);
+    renderRows();
+  });
   els.resultsSearch.addEventListener('input', renderRows);
   els.statusFilter.addEventListener('change', renderRows);
   els.reloadSheetBtn.addEventListener('click', () => activeSheet && loadSheet(activeSheet));
 
   (async function init(){
-    workbookSheets = uniqSheets([...(await discoverSheets()), ...MANUAL_SHEETS]);
+    workbookSheets = uniqSheets([...MANUAL_SHEETS]);
     if (!workbookSheets.length) workbookSheets = [...FALLBACK_SHEETS];
-    els.docName.textContent = 'Spreadsheet SUKNA XXI Selangor 2026';
+    els.docName.textContent = 'SUKNA XXI Selangor 2026';
     renderSheetTabs();
     loadSheet(workbookSheets[0]);
   })();

@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#e31e24" />
   <meta name="description" content="Jadual dan keputusan perlawanan SUKNA XXI Selangor 2026 dalam paparan portal yang kemas, bukan jadual spreadsheet biasa." />
   <title>Jadual &amp; Keputusan | SUKNA XXI Selangor 2026</title>
-  <link rel="manifest" href="manifest.webmanifest?v=20260915n" />
+  <link rel="manifest" href="manifest.webmanifest?v=20260915o" />
   <link rel="icon" href="assets/mascot.webp" type="image/webp" />
-  <link rel="stylesheet" href="css/style.css?v=20260915n" />
+  <link rel="stylesheet" href="css/style.css?v=20260915o" />
 </head>
 <body class="results-page-body">
   <a class="skip-link" href="#main">Langkau ke kandungan</a>
@@ -47,17 +47,17 @@
       <div class="results-hero-glow"></div>
       <div class="container results-hero-layout-page">
         <div class="results-hero-copy">
-          <span class="portal-label">PAPARAN KEDUA</span>
+          <span class="portal-label">SUKNA XXI · MATCH CENTRE</span>
           <h1>Jadual <span>&amp;</span> Keputusan</h1>
-          <p>Halaman khas untuk memaparkan keseluruhan dokumen jadual dan keputusan perlawanan SUKNA XXI Selangor 2026 tanpa rupa spreadsheet asal. Tab helaian sukan akan dibaca dan dipaparkan semula sebagai kad portal.</p>
+          <p>Pusat pertandingan SUKNA XXI Selangor 2026. Pilih sukan, semak jadual, pusingan, venue dan keputusan dalam paparan ala temasya — bukan spreadsheet.</p>
           <div class="results-hero-actions">
             <a class="btn primary" href="#sheetBoard">Lihat Paparan <span>→</span></a>
             <a class="btn outline" href="index.html#utama">Kembali Portal Utama</a>
           </div>
           <div class="results-hero-inline-stats">
-            <article><small>Dokumen Sumber</small><b>Google Sheet SUKNA XXI</b></article>
-            <article><small>Mod Paparan</small><b>Portal Kad / Bukan Spreadsheet</b></article>
-            <article><small>Kandungan</small><b>Semua tab sukan & keputusan</b></article>
+            <article><small>Match Centre</small><b>14 Tab Pertandingan</b></article>
+            <article><small>Paparan</small><b>Jadual · Pusingan · Keputusan</b></article>
+            <article><small>Sumber</small><b>Data Rasmi Urus Setia</b></article>
           </div>
         </div>
         <div class="results-hero-side">
@@ -72,24 +72,24 @@
       <div class="container">
         <div class="section-head results-section-head">
           <div>
-            <span class="kicker">PUSAT JADUAL &amp; KEPUTUSAN</span>
-            <h2>Semua helaian jadual dalam satu pengalaman portal</h2>
-            <p>Pilih tab helaian di bawah. Sistem akan cuba membaca keseluruhan dokumen termasuk tab-tab sukan lain dan memaparkannya semula dalam bentuk yang lebih kemas dan mesra telefon.</p>
+            <span class="kicker">MATCH CENTRE SUKNA XXI</span>
+            <h2>Pilih sukan &amp; lihat jadual pertandingan</h2>
+            <p>Setiap tab sukan di bawah disambungkan terus kepada helaian rasmi masing-masing. Paparan diolah semula menjadi kad acara, status dan keputusan yang lebih mudah dibaca pada desktop serta telefon.</p>
           </div>
           <button class="btn outline" id="reloadSheetBtn" type="button">↻ Muat Semula Data</button>
         </div>
 
         <div class="sheet-board-shell">
           <div class="sheet-board-topline">
-            <div class="sheet-doc-pill">Dokumen: <b id="docName">Jadual &amp; Keputusan SUKNA XXI</b></div>
-            <div class="sheet-doc-pill">Tab Aktif: <b id="activeSheetName">Memuatkan…</b></div>
-            <div class="sheet-doc-pill">Status: <b id="sheetLastUpdate">Menunggu data…</b></div>
+            <div class="sheet-doc-pill">Pertandingan: <b id="docName">SUKNA XXI Selangor 2026</b></div>
+            <div class="sheet-doc-pill">Sukan Aktif: <b id="activeSheetName">Memuatkan…</b></div>
+            <div class="sheet-doc-pill">Data: <b id="sheetLastUpdate">Menunggu data…</b></div>
           </div>
 
           <div class="sheet-tabs-wrap">
             <div class="sheet-tabs-title">
-              <b>Tab Helaian</b>
-              <span id="sheetTabsInfo">Sistem akan memaparkan tab sukan apabila metadata dokumen tersedia.</span>
+              <b>Pilih Sukan</b>
+              <span id="sheetTabsInfo">14 kategori telah dipautkan terus kepada helaian rasmi pertandingan.</span>
             </div>
             <div class="sheet-tabs" id="sheetTabs"></div>
           </div>
@@ -111,6 +111,7 @@
               </label>
             </div>
             <div class="sport-chip-bar" id="sportChipBar"></div>
+            <div class="date-filter-row" id="dateChipBar"></div>
           </div>
 
           <div class="sheet-loading-panel" id="sheetLoadingPanel">
@@ -132,12 +133,12 @@
           </div>
 
           <div class="results-block-head">
-            <div><b>Highlight Perlawanan</b><span>Rekod utama akan dipaparkan sebagai kad ringkas.</span></div>
+            <div><b>Perlawanan Utama</b><span>Perlawanan live, keputusan terkini dan acara akan datang akan diutamakan.</span></div>
           </div>
           <div class="featured-match-grid" id="featuredMatchGrid"></div>
 
           <div class="results-block-head results-block-head-list">
-            <div><b>Senarai Penuh Paparan Portal</b><span>Bukan dalam bentuk jadual spreadsheet. Setiap rekod akan dipaparkan sebagai kad maklumat.</span></div>
+            <div><b>Jadual &amp; Keputusan Penuh</b><span>Susunan pertandingan mengikut sukan, pusingan, masa dan venue.</span></div>
             <small id="resultsCountInfo">0 rekod</small>
           </div>
           <div class="results-card-wall" id="resultsCardWall"></div>
@@ -165,7 +166,7 @@
     </div>
   </footer>
 
-  <script src="js/data.js?v=20260915n"></script>
-  <script src="js/results.js?v=20260915n"></script>
+  <script src="js/data.js?v=20260915o"></script>
+  <script src="js/results.js?v=20260915o"></script>
 </body>
 </html>

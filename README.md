@@ -33,3 +33,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 
 
 - Tambah halaman kedua `results.html` untuk paparan khas Jadual & Keputusan (tanpa rupa spreadsheet), diakses melalui tab navigasi atas.
+
+- Match Centre page 2 dikemas kini ala antaramuka temasya/SUKMA dan dipautkan kepada 14 gid sukan yang diberi pengguna.
