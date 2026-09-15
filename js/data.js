@@ -128,7 +128,7 @@ window.SUKNA_DATA = {
     {icon:'🚒', name:'Balai Bomba Serdang', phone:'03-8941 6281', distance:'7.2 km'}
   ],
   protocol: [
-    ['Susun Atur Majlis Pembukaan','assets/official/susun-atur-pembukaan.webp'],
+    ['Flow Majlis Perasmian','assets/official/flow-majlis-perasmian.webp'],
     ['Susun Atur Perbarisan','assets/official/perbarisan.webp'],
     ['Lokasi Dewan Besar','assets/official/lokasi-dewan-besar.webp'],
     ['Susun Atur Majlis Penutup','assets/official/susun-atur-penutup.webp']
