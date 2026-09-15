@@ -1,8 +1,8 @@
-const CACHE='sukna21-v7-20260915-docs';
+const CACHE='sukna21-v8-20260915-sponsors';
 const CORE=[
   './','./index.html','./css/style.css?v=20260915e','./js/data.js?v=20260915e','./js/app.js?v=20260915e',
   './assets/sukna-logo.webp','./assets/mascot.webp','./assets/partners-strip.webp',
-  './assets/ui/official-cover.webp','./assets/ui/stadium-page.webp','./assets/ui/accom-page.webp','./assets/icons/sepak-takraw.svg','./assets/official/majlis-perasmian.webp','./assets/official/majlis-penutupan.webp','./assets/official/tarikh-penting.webp','./assets/official/jadual-acara.webp'
+  './assets/ui/official-cover.webp','./assets/ui/stadium-page.webp','./assets/ui/accom-page.webp','./assets/icons/sepak-takraw.svg','./assets/official/majlis-perasmian.webp','./assets/official/majlis-penutupan.webp','./assets/official/tarikh-penting.webp','./assets/official/jadual-acara.webp','./assets/sponsors/platinum.webp','./assets/sponsors/gold.webp','./assets/sponsors/silver.webp'
 ];
 
 self.addEventListener('install', event => {
