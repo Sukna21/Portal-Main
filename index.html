@@ -8,7 +8,7 @@
   <title>Portal Utama SUKNA XXI Selangor 2026</title>
   <link rel="manifest" href="manifest.webmanifest?v=20260915c" />
   <link rel="icon" href="assets/mascot.webp" type="image/webp" />
-  <link rel="stylesheet" href="css/style.css?v=20260915j" />
+  <link rel="stylesheet" href="css/style.css?v=20260915k" />
 </head>
 <body>
   <a class="skip-link" href="#main">Langkau ke kandungan</a>
@@ -31,7 +31,6 @@
         <div class="nav-links" id="mainNav">
           <a href="#info">Info Kejohanan</a>
           <a href="#jadual">Jadual</a>
-          <a href="#keputusan">Keputusan</a>
           <a href="#lokasi">Venue</a>
           <a href="#penginapan">Penginapan</a>
           <a href="#galeri">Galeri</a>
@@ -177,87 +176,6 @@
       </div>
     </section>
 
-    <section class="section results-section" id="keputusan">
-      <div class="container">
-        <div class="results-hero">
-          <div>
-            <span class="kicker">JADUAL & KEPUTUSAN LIVE</span>
-            <h2>Perlawanan SUKNA XXI</h2>
-            <p>Paparan ini disambungkan terus kepada Google Sheet urus setia. Sebarang kemas kini jadual atau keputusan dalam helaian sumber akan dipaparkan di sini.</p>
-          </div>
-          <div class="live-pill"><i></i><span>LIVE</span></div>
-        </div>
-
-        <div class="results-status-grid">
-          <article><span>↻</span><div><b>Auto Update</b><small>Sumber Google Sheet urus setia</small></div></article>
-          <article><span>▦</span><div><b>Jadual & Keputusan</b><small>Tab pertandingan gid 1303193966</small></div></article>
-          <a class="results-open" href="https://docs.google.com/spreadsheets/d/1qiRF16JhUlDBV9ZvoO6YhA5JnCbjqFcs/edit?gid=1303193966#gid=1303193966" target="_blank" rel="noopener"><span>↗</span><div><b>Buka Paparan Penuh</b><small>Google Sheets</small></div></a>
-        </div>
-
-        <div class="results-toolbar">
-          <div>
-            <b>Papan Keputusan Rasmi</b>
-            <span>Paparan khas portal — bukan paparan Google Sheet biasa.</span>
-          </div>
-          <div class="results-toolbar-actions">
-            <span class="results-updated" id="resultsUpdated">Menunggu data…</span>
-            <button type="button" class="refresh-sheet-btn" id="resultsRefresh">↻ Refresh</button>
-          </div>
-        </div>
-
-        <div class="live-board-wrap">
-          <div class="sheet-loading" id="sheetLoading"><span></span><b>Memuatkan jadual & keputusan...</b></div>
-          <div class="results-error" id="resultsError" hidden>
-            <b>Data belum dapat dimuatkan.</b>
-            <p>Sila pastikan Google Sheet dibuka sekurang-kurangnya sebagai <b>Viewer</b>. Sementara itu, guna butang <b>Buka Paparan Penuh</b>.</p>
-          </div>
-
-          <div class="results-summary-grid" id="resultsSummaryGrid">
-            <article><small>Perlawanan / Rekod</small><b>—</b></article>
-            <article><small>Sedang berlangsung</small><b>—</b></article>
-            <article><small>Selesai</small><b>—</b></article>
-            <article><small>Acara / sukan</small><b>—</b></article>
-          </div>
-
-          <div class="results-filters">
-            <label><span>Sukan</span><select id="filterSport"><option value="">Semua sukan</option></select></label>
-            <label><span>Tarikh</span><select id="filterDate"><option value="">Semua tarikh</option></select></label>
-            <label><span>Status</span><select id="filterStatus"><option value="">Semua status</option><option value="live">Live</option><option value="done">Selesai</option><option value="upcoming">Akan datang</option></select></label>
-            <label class="search-grow"><span>Carian</span><input id="filterSearch" type="search" placeholder="Cari pasukan, acara, venue..."></label>
-          </div>
-
-          <div class="results-cards-head">
-            <b>Highlight Perlawanan & Keputusan</b>
-            <small>Dipetik terus daripada helaian rasmi dan disusun semula dalam gaya portal.</small>
-          </div>
-          <div class="results-card-grid" id="resultsCards"></div>
-
-          <div class="results-table-shell">
-            <div class="results-table-head">
-              <b>Senarai penuh jadual & keputusan</b>
-              <small>Gunakan tapisan di atas untuk fokus kepada acara tertentu.</small>
-            </div>
-            <div class="results-table-wrap">
-              <table class="results-data-table" id="resultsTable">
-                <thead>
-                  <tr>
-                    <th>Acara</th>
-                    <th>Perlawanan / Pasukan</th>
-                    <th>Tarikh & Masa</th>
-                    <th>Venue</th>
-                    <th>Keputusan</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <p class="results-note"><b>Nota:</b> Data live diambil terus daripada Google Sheet urus setia dan disusun semula sebagai kad keputusan dalam portal. Jika data tidak keluar, semak akses helaian atau gunakan pautan <b>Buka Paparan Penuh</b>.</p>
-      </div>
-    </section>
-
     <section class="section" id="sukan">
       <div class="container">
         <div class="section-head">
@@ -396,7 +314,6 @@
           <a href="assets/official/tarikh-penting.webp" target="_blank" rel="noopener"><span>📌</span><div><b>Tarikh Penting</b><small>Milestone & acara utama</small></div></a>
           <a href="assets/official/majlis-perasmian.webp" target="_blank" rel="noopener"><span>🎤</span><div><b>Majlis Perasmian</b><small>Poster & atur cara rasmi</small></div></a>
           <a href="assets/official/majlis-penutupan.webp" target="_blank" rel="noopener"><span>🏁</span><div><b>Majlis Penutupan</b><small>Poster & atur cara rasmi</small></div></a>
-          <a href="#keputusan"><span>📊</span><div><b>Jadual & Keputusan Live</b><small>Paparan terus dalam portal</small></div></a>
           <a href="https://sukna21.github.io/lucky-draw/" target="_blank" rel="noopener"><span>🎁</span><div><b>Cabutan Bertuah</b><small>Aplikasi SUKNA XXI</small></div></a>
           <a href="#top"><span>⬆️</span><div><b>Kembali ke atas</b><small>Portal utama</small></div></a>
         </div>
@@ -416,7 +333,7 @@
     <div class="footer-main">
       <div class="container footer-grid">
         <div><img src="assets/sukna-logo.webp" alt="Logo SUKNA XXI"><p>Kejohanan Sukan Nasional Perancangan Bandar dan Desa Malaysia Kali Ke-21</p></div>
-        <div><b>Pautan Pantas</b><p><a href="#utama">Home</a> · <a href="#jadual">Jadual</a> · <a href="#keputusan">Keputusan</a> · <a href="#lokasi">Venue</a> · <a href="#penginapan">Penginapan</a> · <a href="#penaja">Penaja</a> · <a href="#muat-turun">Muat Turun</a></p></div>
+        <div><b>Pautan Pantas</b><p><a href="#utama">Home</a> · <a href="#jadual">Jadual</a> · <a href="#lokasi">Venue</a> · <a href="#penginapan">Penginapan</a> · <a href="#penaja">Penaja</a> · <a href="#muat-turun">Muat Turun</a></p></div>
         <div class="footer-tag">KEJAYAAN BERSAMA,<br><b>SEMANGAT JUARA</b><small>17 – 20 September 2026 · UPM Serdang</small></div>
       </div>
     </div>
@@ -427,7 +344,7 @@
     <div class="modal-panel"><button class="modal-close" data-close-modal aria-label="Tutup">×</button><div id="modalBody"></div></div>
   </div>
 
-  <script src="js/data.js?v=20260915j"></script>
-  <script src="js/app.js?v=20260915j"></script>
+  <script src="js/data.js?v=20260915k"></script>
+  <script src="js/app.js?v=20260915k"></script>
 </body>
 </html>
