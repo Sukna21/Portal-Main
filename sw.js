@@ -1,4 +1,4 @@
-const CACHE='sukna21-v13-20260915-no-results';
+const CACHE='sukna21-v14-20260915-college-maps';
 const CORE=[
   './','./index.html','./css/style.css?v=20260915k','./js/data.js?v=20260915k','./js/app.js?v=20260915k',
   './assets/sukna-logo.webp','./assets/mascot.webp','./assets/partners-strip.webp',
