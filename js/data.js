@@ -65,7 +65,7 @@ window.SUKNA_DATA = {
     {icon:'🎯', name:'Dart Berpasukan', cat:'Lelaki & Wanita', reg:'13 pemain + 2', play:'8 pemain', venue:'Akademi Sukan UPM', rule:'5 kategori; best of three set - 501.'},
     {icon:'♟️', name:'Karom Berpasukan', cat:'Lelaki & Wanita', reg:'14 pemain + 2', play:'9 pemain', venue:'Akademi Sukan UPM', rule:'Regu lelaki veteran, pegawai wanita, regu wanita veteran, regu campuran dan regu lelaki terbuka.'},
     {icon:'🏓', name:'Ping Pong Berpasukan', cat:'Lelaki & Wanita', reg:'16 pemain + 2', play:'10 pemain', venue:'Dewan Serbaguna Akademi Sukan UPM', rule:'5 kategori regu mengikut kombinasi pegawai, veteran dan terbuka.'},
-    {icon:'🥋', name:'Sepak Takraw Regu', cat:'Lelaki', reg:'6 pemain + 2', play:'3 pemain', venue:'Dewan Serbaguna Akademi Sukan UPM', rule:'Regu campuran kategori; kiraan mata 15 : 15 : 15, best of three.'},
+    {icon:'assets/icons/sepak-takraw.svg', name:'Sepak Takraw Regu', cat:'Lelaki', reg:'6 pemain + 2', play:'3 pemain', venue:'Dewan Serbaguna Akademi Sukan UPM', rule:'Regu campuran kategori; kiraan mata 15 : 15 : 15, best of three.'},
     {icon:'🎳', name:'Boling Berpasukan', cat:'Lelaki & Wanita', reg:'14 pemain + 2', play:'8 pemain', venue:'IOI City Mall, Putrajaya', rule:'3 game; jumlah jatuhan pin keseluruhan tertinggi menentukan pemenang.'},
     {icon:'🪢', name:'Tarik Tali', cat:'Lelaki · 680kg & Freeweight', reg:'10 pemain + 2', play:'8 pemain', venue:'Lapang Sasar Memanah UPM', rule:'Kategori 680kg (jumlah berat tidak melebihi 680kg) dan Freeweight (lebih 680kg).'},
     {icon:'🏃', name:'Olahraga', cat:'Lelaki & Wanita', reg:'34 pemain', play:'24 pemain', venue:'Stadium UPM', rule:'9 kategori termasuk 4x100m, 100m, 200m, jalan kaki 1,000m dan 8x50m campuran.'}
