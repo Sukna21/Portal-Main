@@ -1,0 +1,12 @@
+{
+  "name": "SUKNA21 Selangor 2026",
+  "short_name": "SUKNA21",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fffbe8",
+  "theme_color": "#e31e24",
+  "description": "Portal utama SUKNA XXI Selangor 2026",
+  "icons": [
+    {"src":"assets/mascot.webp","sizes":"any","type":"image/webp","purpose":"any"}
+  ]
+}
