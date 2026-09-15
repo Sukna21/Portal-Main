@@ -64,7 +64,7 @@
   }
   tabs.innerHTML = D.days.map((d,i)=>`<button class="day-tab ${i===0?'active':''}" data-id="${d.id}" role="tab"><b>${d.date}</b><span>${d.day}</span></button>`).join('');
   tabs.addEventListener('click', e => { const b=e.target.closest('.day-tab'); if(b) renderDay(b.dataset.id); });
-  renderDay('17');
+  renderDay('16');
 
   // Sports
   const grid = $('#sportsGrid');

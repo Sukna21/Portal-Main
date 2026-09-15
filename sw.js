@@ -2,7 +2,7 @@ const CACHE='sukna21-v3-20260915';
 const CORE=[
   './','./index.html','./css/style.css?v=20260915c','./js/data.js?v=20260915c','./js/app.js?v=20260915c',
   './assets/sukna-logo.webp','./assets/mascot.webp','./assets/partners-strip.webp',
-  './assets/ui/official-cover.webp','./assets/ui/stadium-page.webp','./assets/ui/accom-page.webp','./assets/icons/sepak-takraw.svg'
+  './assets/ui/official-cover.webp','./assets/ui/stadium-page.webp','./assets/ui/accom-page.webp','./assets/icons/sepak-takraw.svg','./assets/official/aturcara-penuh.webp'
 ];
 
 self.addEventListener('install', event => {

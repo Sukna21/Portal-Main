@@ -1,11 +1,11 @@
 # Portal Utama SUKNA XXI Selangor 2026
 
-Portal statik, mobile-first dan sedia untuk GitHub Pages. Kandungan utama dibina berasaskan dokumen **INFO PENUH SUKNA-21 SELANGOR.pdf**.
+Portal statik, mobile-first dan sedia untuk GitHub Pages. Kandungan utama dibina berasaskan dokumen **INFO PENUH SUKNA-21 SELANGOR.pdf** dan telah diselaraskan dengan **ATURCARA PENUH SUKNA21.pdf**.
 
 ## Kandungan portal
 - Hero + countdown acara 17-20 September 2026
 - Statistik 648 peserta / 6 kontinjen / 20 pejabat
-- Jadual harian dan tarikh penting
+- Aturcara penuh 16-20 September 2026 (pendaftaran awal, makan, rehearsal, pertandingan, final dan majlis rasmi)
 - 14 permainan / acara (ringkasan format pertandingan)
 - Senarai venue dan pautan arah Google Maps
 - Maklumat penginapan & peraturan UPM
@@ -29,5 +29,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 
 ## Nota kandungan rasmi
 - Susunan VVIP/VIP dan maklumat protokol dalam slaid adalah tertakluk kepada pengesahan kehadiran.
-- Jadual ringkas dalam portal direka untuk navigasi cepat. Jadual visual rasmi disediakan dalam bahagian Jadual.
-- Dokumen PDF asal disertakan dalam `assets/` sebagai sumber rujukan penuh.
+- Jadual harian portal telah diselaraskan dengan Aturcara Penuh SUKNA21. Nota rasmi menyatakan sebarang perubahan masa akan dimaklumkan oleh urus setia dari masa ke semasa.
+- Kedua-dua PDF rujukan utama disertakan dalam `assets/`, termasuk `ATURCARA-PENUH-SUKNA21.pdf`.
