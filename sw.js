@@ -1,4 +1,4 @@
-const CACHE='sukna21-v10-20260915-flow-perasmian';
+const CACHE='sukna21-v10-20260915-dewan-map';
 const CORE=[
   './','./index.html','./css/style.css?v=20260915h','./js/data.js?v=20260915h','./js/app.js?v=20260915h',
   './assets/sukna-logo.webp','./assets/mascot.webp','./assets/partners-strip.webp',
