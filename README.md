@@ -30,3 +30,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 ## Nota kandungan rasmi
 - Susunan VVIP/VIP dan maklumat protokol dalam slaid adalah tertakluk kepada pengesahan kehadiran.
 - Jadual harian portal telah diselaraskan dengan Aturcara Penuh SUKNA21. Nota rasmi menyatakan sebarang perubahan masa akan dimaklumkan oleh urus setia dari masa ke semasa.
+
+- Jadual & Keputusan live dalam gaya portal (tanpa paparan iframe Google Sheet)

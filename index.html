@@ -8,7 +8,7 @@
   <title>Portal Utama SUKNA XXI Selangor 2026</title>
   <link rel="manifest" href="manifest.webmanifest?v=20260915c" />
   <link rel="icon" href="assets/mascot.webp" type="image/webp" />
-  <link rel="stylesheet" href="css/style.css?v=20260915i" />
+  <link rel="stylesheet" href="css/style.css?v=20260915j" />
 </head>
 <body>
   <a class="skip-link" href="#main">Langkau ke kandungan</a>
@@ -197,22 +197,64 @@
         <div class="results-toolbar">
           <div>
             <b>Papan Keputusan Rasmi</b>
-            <span>Scroll kiri/kanan jika jadual lebih lebar pada telefon.</span>
+            <span>Paparan khas portal — bukan paparan Google Sheet biasa.</span>
           </div>
-          <button type="button" class="refresh-sheet-btn" id="resultsRefresh">↻ Refresh</button>
+          <div class="results-toolbar-actions">
+            <span class="results-updated" id="resultsUpdated">Menunggu data…</span>
+            <button type="button" class="refresh-sheet-btn" id="resultsRefresh">↻ Refresh</button>
+          </div>
         </div>
 
-        <div class="sheet-frame-wrap">
+        <div class="live-board-wrap">
           <div class="sheet-loading" id="sheetLoading"><span></span><b>Memuatkan jadual & keputusan...</b></div>
-          <iframe
-            id="resultsSheet"
-            title="Jadual dan keputusan perlawanan SUKNA XXI"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            src="https://docs.google.com/spreadsheets/d/1qiRF16JhUlDBV9ZvoO6YhA5JnCbjqFcs/htmlview?gid=1303193966&amp;single=true&amp;widget=true&amp;headers=false">
-          </iframe>
+          <div class="results-error" id="resultsError" hidden>
+            <b>Data belum dapat dimuatkan.</b>
+            <p>Sila pastikan Google Sheet dibuka sekurang-kurangnya sebagai <b>Viewer</b>. Sementara itu, guna butang <b>Buka Paparan Penuh</b>.</p>
+          </div>
+
+          <div class="results-summary-grid" id="resultsSummaryGrid">
+            <article><small>Perlawanan / Rekod</small><b>—</b></article>
+            <article><small>Sedang berlangsung</small><b>—</b></article>
+            <article><small>Selesai</small><b>—</b></article>
+            <article><small>Acara / sukan</small><b>—</b></article>
+          </div>
+
+          <div class="results-filters">
+            <label><span>Sukan</span><select id="filterSport"><option value="">Semua sukan</option></select></label>
+            <label><span>Tarikh</span><select id="filterDate"><option value="">Semua tarikh</option></select></label>
+            <label><span>Status</span><select id="filterStatus"><option value="">Semua status</option><option value="live">Live</option><option value="done">Selesai</option><option value="upcoming">Akan datang</option></select></label>
+            <label class="search-grow"><span>Carian</span><input id="filterSearch" type="search" placeholder="Cari pasukan, acara, venue..."></label>
+          </div>
+
+          <div class="results-cards-head">
+            <b>Highlight Perlawanan & Keputusan</b>
+            <small>Dipetik terus daripada helaian rasmi dan disusun semula dalam gaya portal.</small>
+          </div>
+          <div class="results-card-grid" id="resultsCards"></div>
+
+          <div class="results-table-shell">
+            <div class="results-table-head">
+              <b>Senarai penuh jadual & keputusan</b>
+              <small>Gunakan tapisan di atas untuk fokus kepada acara tertentu.</small>
+            </div>
+            <div class="results-table-wrap">
+              <table class="results-data-table" id="resultsTable">
+                <thead>
+                  <tr>
+                    <th>Acara</th>
+                    <th>Perlawanan / Pasukan</th>
+                    <th>Tarikh & Masa</th>
+                    <th>Venue</th>
+                    <th>Keputusan</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <p class="results-note"><b>Nota:</b> Paparan live memerlukan helaian Google Sheet boleh diakses sebagai Viewer. Jika paparan tidak keluar, gunakan butang <b>Buka Paparan Penuh</b>.</p>
+        <p class="results-note"><b>Nota:</b> Data live diambil terus daripada Google Sheet urus setia dan disusun semula sebagai kad keputusan dalam portal. Jika data tidak keluar, semak akses helaian atau gunakan pautan <b>Buka Paparan Penuh</b>.</p>
       </div>
     </section>
 
@@ -385,7 +427,7 @@
     <div class="modal-panel"><button class="modal-close" data-close-modal aria-label="Tutup">×</button><div id="modalBody"></div></div>
   </div>
 
-  <script src="js/data.js?v=20260915i"></script>
-  <script src="js/app.js?v=20260915i"></script>
+  <script src="js/data.js?v=20260915j"></script>
+  <script src="js/app.js?v=20260915j"></script>
 </body>
 </html>
