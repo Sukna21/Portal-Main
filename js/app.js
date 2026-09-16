@@ -51,6 +51,176 @@
       <div class="gender-split"><span>♂ ${z.male}</span><span>♀ ${z.female}</span></div>
     </div>`).join('');
 
+
+  // Medal tally - live from Google Sheet
+  const MEDAL_SHEET_ID = '15FW6RAQQLHWqPFdHlhjtQrhpB5GoyiAiETumjpOWvoY';
+  const MEDAL_SHEET_URL = `https://docs.google.com/spreadsheets/d/${MEDAL_SHEET_ID}/edit?usp=sharing`;
+  const MEDAL_REFRESH_MS = 60000;
+  const medalFallback = (D.medals || []).map(m => ({...m}));
+  let medalRefreshTimer = null;
+
+  const medalNameAliases = new Map([
+    ['zon hq','Zon Ibu Pejabat'],
+    ['hq','Zon Ibu Pejabat'],
+    ['zon ibu pejabat','Zon Ibu Pejabat'],
+    ['ibu pejabat','Zon Ibu Pejabat'],
+    ['zon tengah','Zon Tengah'],
+    ['tengah','Zon Tengah'],
+    ['zon utara','Zon Utara'],
+    ['utara','Zon Utara'],
+    ['zon timur','Zon Timur'],
+    ['timur','Zon Timur'],
+    ['zon selatan','Zon Selatan'],
+    ['selatan','Zon Selatan'],
+    ['zon sabah','Zon Sabah'],
+    ['sabah','Zon Sabah']
+  ]);
+
+  const cleanMedalText = v => String(v ?? '').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+  const normMedal = v => cleanMedalText(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  const medalNum = v => {
+    const n = Number(String(v ?? '').replace(/[^0-9.-]/g,''));
+    return Number.isFinite(n) ? Math.max(0, Math.round(n)) : 0;
+  };
+  const canonicalMedalName = name => medalNameAliases.get(normMedal(name)) || cleanMedalText(name);
+
+  function renderMedals(input, meta={}){
+    const byName = new Map((input || []).filter(Boolean).map(m => [canonicalMedalName(m.name), {
+      name: canonicalMedalName(m.name),
+      gold: medalNum(m.gold),
+      silver: medalNum(m.silver),
+      bronze: medalNum(m.bronze)
+    }]));
+
+    const medals = medalFallback.map(base => {
+      const live = byName.get(canonicalMedalName(base.name));
+      const m = live || {...base};
+      return {...m, total:(medalNum(m.gold)+medalNum(m.silver)+medalNum(m.bronze))};
+    });
+
+    // Include any additional contingents that may exist in the sheet.
+    byName.forEach((m,name) => {
+      if(!medals.some(x => canonicalMedalName(x.name) === name)) medals.push({...m, total:m.gold+m.silver+m.bronze});
+    });
+
+    const medalHasData = medals.some(m => m.total > 0);
+    const medalSorted = [...medals].sort((a,b) => (b.gold-a.gold) || (b.silver-a.silver) || (b.bronze-a.bronze) || a.name.localeCompare(b.name,'ms'));
+    const totals = medals.reduce((acc,m) => { acc.gold += m.gold; acc.silver += m.silver; acc.bronze += m.bronze; acc.total += m.total; return acc; }, {gold:0,silver:0,bronze:0,total:0});
+    const setText = (id, value) => { const el=$(id); if(el) el.textContent=value; };
+    setText('#medalGoldTotal', totals.gold);
+    setText('#medalSilverTotal', totals.silver);
+    setText('#medalBronzeTotal', totals.bronze);
+    setText('#medalGrandTotal', totals.total);
+
+    const medalStandings = $('#medalStandings');
+    if(medalStandings){
+      medalStandings.innerHTML = medalSorted.map((m,i) => `
+        <div class="medal-row ${m.total>0?'has-medals':'empty-medals'}">
+          <span class="medal-rank">${medalHasData ? i+1 : '–'}</span>
+          <div class="medal-team"><b>${m.name}</b><small>${m.total>0 ? `${m.total} pingat` : 'Belum ada pingat disahkan'}</small></div>
+          <span class="medal-count gold"><i></i><b>${m.gold}</b></span>
+          <span class="medal-count silver"><i></i><b>${m.silver}</b></span>
+          <span class="medal-count bronze"><i></i><b>${m.bronze}</b></span>
+          <span class="medal-total"><b>${m.total}</b></span>
+        </div>`).join('');
+    }
+
+    const badge = $('#medalStatusBadge');
+    if(badge){
+      badge.textContent = meta.loading ? 'Menyambung…' : meta.error ? 'Sambungan gagal' : 'Live Google Sheet';
+      badge.classList.toggle('is-live', !meta.loading && !meta.error);
+      badge.classList.toggle('is-error', !!meta.error);
+    }
+    const when = meta.updatedAt || new Date();
+    if(meta.loading) setText('#medalUpdatedAt','Menyambung ke Google Sheet…');
+    else if(meta.error) setText('#medalUpdatedAt','Gagal membaca Google Sheet · data terakhir dikekalkan');
+    else setText('#medalUpdatedAt', `Dikemas kini ${when.toLocaleDateString('ms-MY',{day:'2-digit',month:'short'})} · ${when.toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}`);
+
+    const note = $('#medalNote');
+    const noteText = $('#medalNoteText');
+    if(note && noteText){
+      if(meta.error){
+        note.hidden = false;
+        noteText.innerHTML = '<b>Data live belum dapat dibaca.</b> Pastikan Google Sheet boleh dilihat oleh sesiapa yang mempunyai pautan. Portal akan cuba semula secara automatik.';
+      } else if(!medalHasData){
+        note.hidden = false;
+        noteText.innerHTML = '<b>Belum ada kutipan pingat direkodkan.</b> Bila angka Emas, Perak atau Gangsa di Google Sheet dikemas kini, kedudukan di sini akan berubah secara automatik.';
+      } else {
+        note.hidden = true;
+      }
+    }
+  }
+
+  function parseMedalTable(table){
+    if(!table || !Array.isArray(table.cols)) return [];
+    const labels = table.cols.map((c,i) => cleanMedalText(c.label || c.id || `kolum ${i+1}`));
+    const findCol = regs => labels.findIndex(label => regs.some(re => re.test(normMedal(label))));
+    const iName = findCol([/kontinjen/,/zon/,/pasukan/,/team/]);
+    const iGold = findCol([/emas/,/gold/]);
+    const iSilver = findCol([/perak/,/silver/]);
+    const iBronze = findCol([/gangsa/,/bronze/]);
+    if(iName < 0 || iGold < 0 || iSilver < 0 || iBronze < 0) throw new Error('Kolum Kontinjen/Emas/Perak/Gangsa tidak dijumpai');
+
+    return (table.rows || []).map(row => {
+      const cells = row.c || [];
+      const val = i => {
+        const c = cells[i];
+        if(!c) return '';
+        return c.v ?? c.f ?? '';
+      };
+      const name = cleanMedalText(val(iName));
+      if(!name || /jumlah|total/i.test(name)) return null;
+      return { name, gold:medalNum(val(iGold)), silver:medalNum(val(iSilver)), bronze:medalNum(val(iBronze)) };
+    }).filter(Boolean);
+  }
+
+  function loadMedalSheet(){
+    renderMedals(medalFallback,{loading:true});
+    return new Promise((resolve,reject) => {
+      const cb = '__suknaMedals_' + Math.random().toString(36).slice(2);
+      const script = document.createElement('script');
+      let settled = false;
+      const cleanup = () => { script.remove(); try{ delete window[cb]; }catch(_){} };
+      const timer = setTimeout(() => {
+        if(settled) return;
+        settled = true; cleanup(); reject(new Error('Google Sheet timeout'));
+      }, 15000);
+      window[cb] = payload => {
+        if(settled) return;
+        settled = true; clearTimeout(timer); cleanup();
+        try{
+          if(!payload || payload.status === 'error' || !payload.table) throw new Error('Google Sheet response invalid');
+          const rows = parseMedalTable(payload.table);
+          if(!rows.length) throw new Error('Tiada rekod pingat dijumpai');
+          resolve(rows);
+        }catch(err){ reject(err); }
+      };
+      script.onerror = () => {
+        if(settled) return;
+        settled = true; clearTimeout(timer); cleanup(); reject(new Error('Google Sheet tidak dapat dimuatkan'));
+      };
+      // No gid is supplied intentionally: the first/default worksheet is used.
+      script.src = `https://docs.google.com/spreadsheets/d/${MEDAL_SHEET_ID}/gviz/tq?headers=1&tqx=responseHandler:${cb};reqId:${Date.now()}`;
+      document.body.appendChild(script);
+    }).then(rows => {
+      renderMedals(rows,{updatedAt:new Date()});
+      return rows;
+    }).catch(err => {
+      console.warn('Medal sheet live sync failed:', err);
+      renderMedals(medalFallback,{error:true});
+      throw err;
+    });
+  }
+
+  const medalRefreshBtn = $('#medalRefreshBtn');
+  medalRefreshBtn?.addEventListener('click', () => {
+    medalRefreshBtn.disabled = true;
+    loadMedalSheet().catch(()=>{}).finally(() => { medalRefreshBtn.disabled = false; });
+  });
+  renderMedals(medalFallback,{loading:true});
+  loadMedalSheet().catch(()=>{});
+  medalRefreshTimer = setInterval(() => loadMedalSheet().catch(()=>{}), MEDAL_REFRESH_MS);
+
   // Daily schedule
   const tabs = $('#dayTabs'), dayContent = $('#dayContent');
   function renderDay(id){

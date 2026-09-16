@@ -41,3 +41,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - KPZ map fix: Kolej Pendeta Za'aba UPM updated to coordinates `2.9916080474252276,101.70679692588335` in both accommodation card and venue list.
 
 - Koordinat Padang A & Padang B UPM dikemas kini kepada `2.9974363473082057, 101.70580353748177`.
+
+- Kutipan Pingat Keseluruhan kini disambung live ke Google Sheet `15FW6RAQQLHWqPFdHlhjtQrhpB5GoyiAiETumjpOWvoY` dan auto-refresh setiap 60 saat.

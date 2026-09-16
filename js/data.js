@@ -90,6 +90,15 @@ window.SUKNA_DATA = {
       ]
     }
   ],
+  medals: [
+    {name:'Zon Ibu Pejabat', gold:0, silver:0, bronze:0},
+    {name:'Zon Tengah', gold:0, silver:0, bronze:0},
+    {name:'Zon Utara', gold:0, silver:0, bronze:0},
+    {name:'Zon Timur', gold:0, silver:0, bronze:0},
+    {name:'Zon Selatan', gold:0, silver:0, bronze:0},
+    {name:'Zon Sabah', gold:0, silver:0, bronze:0}
+  ],
+  medalUpdatedAt: '',
   sports: [
     {icon:'⚽', name:'Bola Sepak', cat:'Lelaki · 11 sebelah', reg:'18 pemain + 2', play:'11 pemain', venue:'Padang A & Padang B UPM / Stadium UPM (Final)', rule:'30 minit setiap separuh; separuh akhir/akhir 35 minit setiap separuh.'},
     {icon:'🥅', name:'Bola Jaring', cat:'Wanita', reg:'12 pemain + 2', play:'7 pemain', venue:'Dewan Serbaguna UPM', rule:'7 minit : 2 minit rehat : 7 minit.'},
