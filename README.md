@@ -49,3 +49,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Parser kutipan pingat diperkukuh: padanan nama Zon Sabah, Zon Selatan dan Zon Timur kini toleran kepada nombor/prefix/suffix dan baris pendua tidak lagi menimpa data sah dengan baris kosong.
 
 - Kutipan pingat: parser kini membaca baris header sebenar dalam Google Sheet (bukan bergantung kepada label GViz), jadi Emas/Perak/Gangsa dipetakan ikut kolum sebenar. Setiap 6 zon diaudit satu-per-satu dalam console untuk debugging tanpa memaparkan mesej teknikal kepada pengguna.
+
+- Fix kutipan pingat live: refresh tidak lagi kosongkan jadual kepada 0 sebelum respons Google Sheet tiba. Data terakhir yang sah dikekalkan, request dicuba semula sehingga 3 kali selepas edit Sheet, dan respons lama diabaikan jika refresh baharu telah bermula.

@@ -249,8 +249,10 @@
     return [...byZone.values()];
   }
 
-  function loadMedalSheet(){
-    renderMedals(medalFallback,{loading:true});
+  let medalLastGoodRows = null;
+  let medalRequestSerial = 0;
+
+  function fetchMedalSheetOnce(){
     return new Promise((resolve,reject) => {
       const cb = '__suknaMedals_' + Math.random().toString(36).slice(2);
       const script = document.createElement('script');
@@ -260,31 +262,69 @@
         if(settled) return;
         settled = true; cleanup(); reject(new Error('Google Sheet timeout'));
       }, 15000);
+
       window[cb] = payload => {
         if(settled) return;
-        settled = true; clearTimeout(timer); cleanup();
+        settled = true;
+        clearTimeout(timer);
+        cleanup();
         try{
-          if(!payload || payload.status === 'error' || !payload.table) throw new Error('Google Sheet response invalid');
+          if(!payload || payload.status === 'error' || !payload.table){
+            throw new Error('Google Sheet response invalid');
+          }
           const rows = parseMedalTable(payload.table);
           if(!rows.length) throw new Error('Tiada rekod pingat dijumpai');
           resolve(rows);
-        }catch(err){ reject(err); }
+        }catch(err){
+          reject(err);
+        }
       };
+
       script.onerror = () => {
         if(settled) return;
-        settled = true; clearTimeout(timer); cleanup(); reject(new Error('Google Sheet tidak dapat dimuatkan'));
+        settled = true;
+        clearTimeout(timer);
+        cleanup();
+        reject(new Error('Google Sheet tidak dapat dimuatkan'));
       };
-      // No gid is supplied intentionally: the first/default worksheet is used.
-      script.src = `https://docs.google.com/spreadsheets/d/${MEDAL_SHEET_ID}/gviz/tq?headers=0&tqx=responseHandler:${cb};reqId:${Date.now()}`;
+
+      // Cache-buster keeps the live medal tally fresh after sheet edits.
+      const bust = Date.now() + '-' + Math.random().toString(36).slice(2);
+      script.src = `https://docs.google.com/spreadsheets/d/${MEDAL_SHEET_ID}/gviz/tq?headers=0&tqx=responseHandler:${cb};reqId:${bust}`;
       document.body.appendChild(script);
-    }).then(rows => {
-      renderMedals(rows,{updatedAt:new Date()});
-      return rows;
-    }).catch(err => {
-      console.warn('Medal sheet live sync failed:', err);
-      // Silent retry: keep the last displayed tally; do not show a connection warning.
-      throw err;
     });
+  }
+
+  async function loadMedalSheet(){
+    const requestId = ++medalRequestSerial;
+
+    // IMPORTANT: never clear the current medal table while refreshing.
+    // The previous code rendered the all-zero fallback before every request.
+    // If Google Sheets was momentarily slow after an edit, the page stayed at zero.
+    for(let attempt=0; attempt<3; attempt++){
+      try{
+        const rows = await fetchMedalSheetOnce();
+
+        // Ignore an older response if a newer refresh has already started.
+        if(requestId !== medalRequestSerial) return rows;
+
+        medalLastGoodRows = rows;
+        renderMedals(rows,{updatedAt:new Date()});
+        return rows;
+      }catch(err){
+        console.warn(`Medal sheet sync attempt ${attempt+1} failed:`, err);
+        if(attempt < 2){
+          await new Promise(r => setTimeout(r, 1200 * (attempt + 1)));
+          continue;
+        }
+
+        // Keep the last valid tally on screen. Never replace it with zeros.
+        if(medalLastGoodRows){
+          return medalLastGoodRows;
+        }
+        throw err;
+      }
+    }
   }
 
   const medalRefreshBtn = $('#medalRefreshBtn');
