@@ -43,3 +43,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Koordinat Padang A & Padang B UPM dikemas kini kepada `2.9974363473082057, 101.70580353748177`.
 
 - Kutipan Pingat Keseluruhan kini disambung live ke Google Sheet `15FW6RAQQLHWqPFdHlhjtQrhpB5GoyiAiETumjpOWvoY` dan auto-refresh setiap 60 saat.
+
+- Paparan status/sumber Google Sheet untuk kutipan pingat disembunyikan; sambungan kini dibuat secara senyap. Endpoint GViz JSONP dibetulkan dan parser boleh mengesan baris header walaupun ada tajuk/baris kosong di atasnya.
