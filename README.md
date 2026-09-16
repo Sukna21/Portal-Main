@@ -57,3 +57,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Tambah logo Gatorade sebagai salah satu penaja Silver dalam portal utama.
 
 - Restore Slide 8: Pelan Lokasi Program – Stadium UPM under Galeri & Protokol → Pelan operasi & protokol, while retaining Gatorade as Silver Sponsor.
+
+- Jadual harian kini membuka tab tarikh semasa secara automatik (waktu Malaysia) jika tarikh berada dalam 16–20 September 2026. Di luar tempoh itu, tab pertama digunakan sebagai default.

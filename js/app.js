@@ -280,9 +280,23 @@
         <div class="timeline">${d.items.map((it,i)=>`<div class="time-item"><i>${String(i+1).padStart(2,'0')}</i><div><b>${it[0]}</b><span>${it[1]}</span><small class="event-time">⏱ ${it[2]}</small></div></div>`).join('')}</div>
       </div>`;
   }
-  tabs.innerHTML = D.days.map((d,i)=>`<button class="day-tab ${i===0?'active':''}" data-id="${d.id}" role="tab"><b>${d.date}</b><span>${d.day}</span></button>`).join('');
+  // Pilih tab tarikh semasa secara automatik apabila portal dibuka.
+  // Tarikh dirujuk kepada waktu Malaysia kerana kejohanan berlangsung di UPM, Selangor.
+  function getDefaultScheduleDay(){
+    try {
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone:'Asia/Kuala_Lumpur', year:'numeric', month:'2-digit', day:'2-digit'
+      }).formatToParts(new Date());
+      const pick = type => parts.find(p => p.type===type)?.value || '';
+      const y = pick('year'), m = pick('month'), d = pick('day');
+      if(y==='2026' && m==='09' && ['16','17','18','19','20'].includes(d)) return String(Number(d));
+    } catch(_) {}
+    return D.days[0]?.id || '16';
+  }
+  const defaultScheduleDay = getDefaultScheduleDay();
+  tabs.innerHTML = D.days.map(d=>`<button class="day-tab ${d.id===defaultScheduleDay?'active':''}" data-id="${d.id}" role="tab"><b>${d.date}</b><span>${d.day}</span></button>`).join('');
   tabs.addEventListener('click', e => { const b=e.target.closest('.day-tab'); if(b) renderDay(b.dataset.id); });
-  renderDay('16');
+  renderDay(defaultScheduleDay);
 
   // Sports
   const grid = $('#sportsGrid');
