@@ -1,6 +1,6 @@
-const CACHE='sukna21-v21-20260916-memanah-map-fix';
+const CACHE='sukna21-v22-20260916-rumah-tamu-map';
 const CORE=[
-  './','./index.html','./css/style.css?v=20260916c','./js/data.js?v=20260916c','./js/app.js?v=20260916c',
+  './','./index.html','./css/style.css?v=20260916d','./js/data.js?v=20260916d','./js/app.js?v=20260916d',
   './assets/sukna-logo.webp','./assets/mascot.webp','./assets/partners-strip.webp',
   './assets/ui/official-cover.webp','./assets/ui/stadium-page.webp','./assets/ui/accom-page.webp','./assets/icons/sepak-takraw.svg','./assets/official/majlis-perasmian.webp','./assets/official/majlis-penutupan.webp','./assets/official/tarikh-penting.webp','./assets/official/jadual-acara.webp','./assets/sponsors/logos/platinum/mbi.webp','./assets/sponsors/logos/platinum/kusel.webp','./assets/sponsors/logos/platinum/sd-guthrie.webp','./assets/sponsors/logos/platinum/ytsb.webp','./assets/sponsors/logos/gold/kdeb.webp','./assets/sponsors/logos/gold/scientex-bestari-jaya.webp','./assets/sponsors/logos/gold/sime-darby-property.webp','./assets/sponsors/logos/gold/alam-rancang.webp','./assets/sponsors/logos/gold/landasan-lumayan.webp','./assets/sponsors/logos/gold/avaland.webp','./assets/sponsors/logos/silver/cyberview.webp','./assets/sponsors/logos/silver/pnsb.webp','./assets/sponsors/logos/silver/worldwide-holdings.webp','./assets/sponsors/logos/silver/uem-sunrise.webp','./assets/sponsors/logos/silver/osk-property.webp','./assets/sponsors/platinum.webp','./assets/sponsors/gold.webp','./assets/sponsors/silver.webp','./assets/official/flow-majlis-perasmian.webp'
 ];
