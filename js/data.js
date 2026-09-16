@@ -116,7 +116,7 @@ window.SUKNA_DATA = {
     {code:'I', name:'Dewan Serbaguna Akademi Sukan UPM', use:'Ping pong, badminton & sepak takraw', query:'Akademi Sukan UPM, Serdang'},
     {code:'J', name:'Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM', use:'Bola tampar lelaki & wanita', query:'Akademi Sukan UPM, Serdang'},
     {code:'K', name:'Kolej 14 UPM', use:'Check-in & penginapan peserta lelaki', query:'2.993288,101.716123'},
-    {code:'L', name:"Kolej Pendeta Za'aba UPM", use:'Check-in & penginapan peserta wanita', query:'2.990494,101.707336'},
+    {code:'L', name:"Kolej Pendeta Za'aba UPM", use:'Check-in & penginapan peserta wanita', query:'2.9916080474252276,101.70679692588335'},
     {code:'M', name:'Dewan Besar UPM', use:'Rehearsal, majlis makan malam & penutup', query:'Dewan Besar UPM, Serdang'},
     {code:'N', name:'IOI City Mall Putrajaya', use:'Tenpin bowling lelaki & wanita', query:'IOI City Mall Putrajaya'}
   ],

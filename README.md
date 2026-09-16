@@ -37,3 +37,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Match Centre page 2 dikemas kini ala antaramuka temasya/SUKMA dan dipautkan kepada 14 gid sukan yang diberi pengguna.
 
 - Halaman Jadual & Keputusan eksperimen telah dikeluarkan semula daripada portal utama. Modul tersebut akan dibangunkan sebagai aplikasi/portal berasingan selepas struktur data Google Sheet disahkan.
+
+- KPZ map fix: Kolej Pendeta Za'aba UPM updated to coordinates `2.9916080474252276,101.70679692588335` in both accommodation card and venue list.
