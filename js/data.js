@@ -110,7 +110,7 @@ window.SUKNA_DATA = {
     {code:'C', name:'Stadium UPM', use:'Majlis perasmian, olahraga & final bola sepak', query:'Stadium UPM, Serdang'},
     {code:'D', name:'Padang A & Padang B UPM', use:'Bola sepak liga kumpulan', query:'2.9974363473082057,101.70580353748177'},
     {code:'E', name:'Gelanggang Sintetik Akademi Sukan UPM', use:'Futsal wanita', query:'Akademi Sukan UPM, Serdang'},
-    {code:'F', name:'Lapang Sasar Memanah UPM', use:'Tarik tali 680kg & Freeweight', query:'Lapang Sasar Memanah UPM, Serdang'},
+    {code:'F', name:'Lapang Sasar Memanah UPM', use:'Tarik tali 680kg & Freeweight', query:'2.985325742190392,101.72622818875978'},
     {code:'G', name:'Bilik Terapi Sukan, Akademi Sukan UPM', use:'Karom berpasukan', query:'Akademi Sukan UPM, Serdang'},
     {code:'H', name:'Bilik Seminar, Akademi Sukan UPM', use:'Dart berpasukan', query:'Akademi Sukan UPM, Serdang'},
     {code:'I', name:'Dewan Serbaguna Akademi Sukan UPM', use:'Ping pong, badminton & sepak takraw', query:'Akademi Sukan UPM, Serdang'},
