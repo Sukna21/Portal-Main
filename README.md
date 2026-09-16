@@ -39,3 +39,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Halaman Jadual & Keputusan eksperimen telah dikeluarkan semula daripada portal utama. Modul tersebut akan dibangunkan sebagai aplikasi/portal berasingan selepas struktur data Google Sheet disahkan.
 
 - KPZ map fix: Kolej Pendeta Za'aba UPM updated to coordinates `2.9916080474252276,101.70679692588335` in both accommodation card and venue list.
+
+- Koordinat Padang A & Padang B UPM dikemas kini kepada `2.9974363473082057, 101.70580353748177`.
