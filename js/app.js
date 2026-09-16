@@ -55,7 +55,7 @@
   // Medal tally - live from Google Sheet
   const MEDAL_SHEET_ID = '15FW6RAQQLHWqPFdHlhjtQrhpB5GoyiAiETumjpOWvoY';
   const MEDAL_SHEET_URL = `https://docs.google.com/spreadsheets/d/${MEDAL_SHEET_ID}/edit?usp=sharing`;
-  const MEDAL_REFRESH_MS = 60000;
+  const MEDAL_REFRESH_MS = 15000;
   const medalFallback = (D.medals || []).map(m => ({...m}));
   let medalRefreshTimer = null;
 
@@ -134,119 +134,38 @@
   function parseMedalTable(table){
     if(!table || !Array.isArray(table.rows)) return [];
 
-    const cellText = c => {
-      if(!c) return '';
-      const value = c.f ?? c.v ?? '';
-      return cleanMedalText(value);
+    const exactZones = {
+      'zon tengah':'Zon Tengah',
+      'zon hq':'Zon Ibu Pejabat',
+      'zon ibu pejabat':'Zon Ibu Pejabat',
+      'zon utara':'Zon Utara',
+      'zon selatan':'Zon Selatan',
+      'zon timur':'Zon Timur',
+      'zon sabah':'Zon Sabah'
     };
 
-    const rawRows = table.rows.map((row, rowIndex) => ({
-      rowIndex,
-      values: (row.c || []).map(cellText)
-    }));
+    const rows = [];
+    for(const row of table.rows){
+      const c = row.c || [];
+      // Because the request below is locked to range B2:E8 with headers=1:
+      // c[0] = PASUKAN, c[1] = EMAS, c[2] = PERAK, c[3] = GANGSA.
+      const teamRaw = cleanMedalText(c[0]?.f ?? c[0]?.v ?? '');
+      const teamKey = normMedal(teamRaw);
+      const name = exactZones[teamKey];
+      if(!name) continue;
 
-    // DEBUG STRATEGY:
-    // Do not trust GViz column labels. Instead, locate the ACTUAL header row
-    // inside the sheet itself. This supports title rows / merged cells above
-    // the table and prevents "Perak" / "Gangsa" from pointing to the wrong
-    // columns.
-    let header = null;
-
-    for(const row of rawRows){
-      const normalized = row.values.map(normMedal);
-
-      const findIndex = regs => normalized.findIndex(v => regs.some(re => re.test(v)));
-      const iName = findIndex([/^(kontinjen|zon|pasukan|team)$/, /kontinjen/, /^zon$/]);
-      const iGold = findIndex([/^emas$/, /^gold$/, /emas/]);
-      const iSilver = findIndex([/^perak$/, /^silver$/, /perak/]);
-      const iBronze = findIndex([/^gangsa$/, /^bronze$/, /gangsa/]);
-
-      if(iName >= 0 && iGold >= 0 && iSilver >= 0 && iBronze >= 0){
-        header = { rowIndex:row.rowIndex, iName, iGold, iSilver, iBronze, values:row.values };
-        break;
-      }
-    }
-
-    // Fallback: some GViz responses still expose correct column labels.
-    if(!header && Array.isArray(table.cols)){
-      const labels = table.cols.map((c,i) => cleanMedalText(c.label || c.id || `kolum ${i+1}`));
-      const findCol = regs => labels.findIndex(label => regs.some(re => re.test(normMedal(label))));
-      const iName = findCol([/kontinjen/,/^zon$/, /pasukan/,/team/]);
-      const iGold = findCol([/emas/,/gold/]);
-      const iSilver = findCol([/perak/,/silver/]);
-      const iBronze = findCol([/gangsa/,/bronze/]);
-      if(iName >= 0 && iGold >= 0 && iSilver >= 0 && iBronze >= 0){
-        header = { rowIndex:-1, iName, iGold, iSilver, iBronze, values:labels };
-      }
-    }
-
-    if(!header){
-      console.warn('Medal parser: header row not found', rawRows);
-      throw new Error('Header Kontinjen / Emas / Perak / Gangsa tidak dijumpai');
-    }
-
-    const knownZones = new Set([
-      'Zon Ibu Pejabat','Zon Tengah','Zon Utara',
-      'Zon Timur','Zon Selatan','Zon Sabah'
-    ]);
-
-    const parsed = [];
-    const startAt = header.rowIndex >= 0 ? header.rowIndex + 1 : 0;
-
-    for(const row of rawRows){
-      if(row.rowIndex < startAt) continue;
-
-      const nameRaw = row.values[header.iName] || '';
-      const canonical = canonicalMedalName(nameRaw);
-
-      // If the expected name column is blank or decorated oddly,
-      // scan the entire row for one of the 6 official zones.
-      let zoneName = knownZones.has(canonical) ? canonical : '';
-      if(!zoneName){
-        for(const value of row.values){
-          const maybe = canonicalMedalName(value);
-          if(knownZones.has(maybe)){
-            zoneName = maybe;
-            break;
-          }
-        }
-      }
-
-      if(!zoneName) continue;
-
-      const goldRaw = row.values[header.iGold] ?? '';
-      const silverRaw = row.values[header.iSilver] ?? '';
-      const bronzeRaw = row.values[header.iBronze] ?? '';
-
-      const parsedRow = {
-        name: zoneName,
-        gold: medalNum(goldRaw),
-        silver: medalNum(silverRaw),
-        bronze: medalNum(bronzeRaw)
-      };
-
-      // Keep a clear console audit so each row can be checked one-by-one
-      // without showing technical messages on the public portal.
-      console.debug('[SUKNA medal row]', {
-        sheetRow: row.rowIndex + 1,
-        zone: zoneName,
-        raw: { gold:goldRaw, silver:silverRaw, bronze:bronzeRaw },
-        parsed: parsedRow
+      rows.push({
+        name,
+        gold: medalNum(c[1]?.f ?? c[1]?.v ?? ''),
+        silver: medalNum(c[2]?.f ?? c[2]?.v ?? ''),
+        bronze: medalNum(c[3]?.f ?? c[3]?.v ?? '')
       });
-
-      parsed.push(parsedRow);
     }
 
-    // Deduplicate by zone, preferring the row with the larger tally.
-    const byZone = new Map();
-    for(const row of parsed){
-      const prev = byZone.get(row.name);
-      const score = row.gold + row.silver + row.bronze;
-      const prevScore = prev ? prev.gold + prev.silver + prev.bronze : -1;
-      if(!prev || score >= prevScore) byZone.set(row.name, row);
+    if(rows.length < 6){
+      console.warn('Medal exact-range parser received fewer than 6 zones:', rows);
     }
-
-    return [...byZone.values()];
+    return rows;
   }
 
   let medalLastGoodRows = null;
@@ -288,9 +207,23 @@
         reject(new Error('Google Sheet tidak dapat dimuatkan'));
       };
 
-      // Cache-buster keeps the live medal tally fresh after sheet edits.
-      const bust = Date.now() + '-' + Math.random().toString(36).slice(2);
-      script.src = `https://docs.google.com/spreadsheets/d/${MEDAL_SHEET_ID}/gviz/tq?headers=0&tqx=responseHandler:${cb};reqId:${bust}`;
+      // Exact source used by the sheet shown by the user:
+      // B2:E8 = PASUKAN | EMAS | PERAK | GANGSA + six official zones.
+      //
+      // The query label changes on every request. This is deliberate:
+      // Google GViz can cache the same query for a short period even after cells
+      // are edited. A unique query forces a fresh evaluation of the sheet.
+      const stamp = Date.now();
+      const tq = `select B,C,D,E where B is not null label B 'PASUKAN_${stamp}', C 'EMAS_${stamp}', D 'PERAK_${stamp}', E 'GANGSA_${stamp}'`;
+      const params = new URLSearchParams({
+        gid: '0',
+        range: 'B2:E8',
+        headers: '1',
+        tq,
+        tqx: `responseHandler:${cb};reqId:${stamp}`
+      });
+
+      script.src = `https://docs.google.com/spreadsheets/d/${MEDAL_SHEET_ID}/gviz/tq?${params.toString()}`;
       document.body.appendChild(script);
     });
   }
