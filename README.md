@@ -55,3 +55,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Kutipan pingat v30: pembacaan Google Sheet kini dikunci tepat kepada B2:E8 (PASUKAN, EMAS, PERAK, GANGSA). Query GViz dijadikan unik pada setiap refresh untuk mengelakkan data lama daripada cache Google. Auto-refresh ditetapkan 15 saat.
 
 - Tambah logo Gatorade sebagai salah satu penaja Silver dalam portal utama.
+
+- Restore Slide 8: Pelan Lokasi Program – Stadium UPM under Galeri & Protokol → Pelan operasi & protokol, while retaining Gatorade as Silver Sponsor.

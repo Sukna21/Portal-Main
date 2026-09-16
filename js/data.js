@@ -139,6 +139,7 @@ window.SUKNA_DATA = {
   protocol: [
     ['Flow Majlis Perasmian','assets/official/flow-majlis-perasmian.webp'],
     ['Susun Atur Perbarisan','assets/official/perbarisan.webp'],
+    ['Pelan Lokasi Program – Stadium UPM','assets/official/pelan-lokasi-program-stadium-upm.webp'],
     ['Lokasi Dewan Besar','assets/official/lokasi-dewan-besar.webp'],
     ['Susun Atur Majlis Penutup','assets/official/susun-atur-penutup.webp']
   ]
