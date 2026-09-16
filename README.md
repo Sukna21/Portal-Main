@@ -44,4 +44,8 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 
 - Kutipan Pingat Keseluruhan kini disambung live ke Google Sheet `15FW6RAQQLHWqPFdHlhjtQrhpB5GoyiAiETumjpOWvoY` dan auto-refresh setiap 60 saat.
 
-- Paparan status/sumber Google Sheet untuk kutipan pingat disembunyikan; sambungan kini dibuat secara senyap. Endpoint GViz JSONP dibetulkan dan parser boleh mengesan baris header walaupun ada tajuk/baris kosong di atasnya.
+- Kutipan pingat live dipulihkan kepada loader Google Sheet versi yang telah berfungsi; label sumber dan status sambungan disorok daripada paparan awam.
+
+- Parser kutipan pingat diperkukuh: padanan nama Zon Sabah, Zon Selatan dan Zon Timur kini toleran kepada nombor/prefix/suffix dan baris pendua tidak lagi menimpa data sah dengan baris kosong.
+
+- Kutipan pingat: parser kini membaca baris header sebenar dalam Google Sheet (bukan bergantung kepada label GViz), jadi Emas/Perak/Gangsa dipetakan ikut kolum sebenar. Setiap 6 zon diaudit satu-per-satu dalam console untuk debugging tanpa memaparkan mesej teknikal kepada pengguna.

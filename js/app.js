@@ -52,18 +52,28 @@
     </div>`).join('');
 
 
-  // Medal tally - live from Google Sheet (silent sync)
+  // Medal tally - live from Google Sheet
   const MEDAL_SHEET_ID = '15FW6RAQQLHWqPFdHlhjtQrhpB5GoyiAiETumjpOWvoY';
+  const MEDAL_SHEET_URL = `https://docs.google.com/spreadsheets/d/${MEDAL_SHEET_ID}/edit?usp=sharing`;
   const MEDAL_REFRESH_MS = 60000;
   const medalFallback = (D.medals || []).map(m => ({...m}));
   let medalRefreshTimer = null;
-  let medalLastGoodRows = medalFallback;
 
   const medalNameAliases = new Map([
-    ['zon hq','Zon Ibu Pejabat'],['hq','Zon Ibu Pejabat'],['zon ibu pejabat','Zon Ibu Pejabat'],['ibu pejabat','Zon Ibu Pejabat'],
-    ['zon tengah','Zon Tengah'],['tengah','Zon Tengah'],['zon utara','Zon Utara'],['utara','Zon Utara'],
-    ['zon timur','Zon Timur'],['timur','Zon Timur'],['zon selatan','Zon Selatan'],['selatan','Zon Selatan'],
-    ['zon sabah','Zon Sabah'],['sabah','Zon Sabah']
+    ['zon hq','Zon Ibu Pejabat'],
+    ['hq','Zon Ibu Pejabat'],
+    ['zon ibu pejabat','Zon Ibu Pejabat'],
+    ['ibu pejabat','Zon Ibu Pejabat'],
+    ['zon tengah','Zon Tengah'],
+    ['tengah','Zon Tengah'],
+    ['zon utara','Zon Utara'],
+    ['utara','Zon Utara'],
+    ['zon timur','Zon Timur'],
+    ['timur','Zon Timur'],
+    ['zon selatan','Zon Selatan'],
+    ['selatan','Zon Selatan'],
+    ['zon sabah','Zon Sabah'],
+    ['sabah','Zon Sabah']
   ]);
 
   const cleanMedalText = v => String(v ?? '').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
@@ -76,7 +86,10 @@
 
   function renderMedals(input, meta={}){
     const byName = new Map((input || []).filter(Boolean).map(m => [canonicalMedalName(m.name), {
-      name: canonicalMedalName(m.name), gold:medalNum(m.gold), silver:medalNum(m.silver), bronze:medalNum(m.bronze)
+      name: canonicalMedalName(m.name),
+      gold: medalNum(m.gold),
+      silver: medalNum(m.silver),
+      bronze: medalNum(m.bronze)
     }]));
 
     const medals = medalFallback.map(base => {
@@ -84,6 +97,8 @@
       const m = live || {...base};
       return {...m, total:(medalNum(m.gold)+medalNum(m.silver)+medalNum(m.bronze))};
     });
+
+    // Include any additional contingents that may exist in the sheet.
     byName.forEach((m,name) => {
       if(!medals.some(x => canonicalMedalName(x.name) === name)) medals.push({...m, total:m.gold+m.silver+m.bronze});
     });
@@ -110,62 +125,132 @@
         </div>`).join('');
     }
 
-    if(meta.updatedAt){
-      setText('#medalUpdatedAt', `Dikemas kini ${meta.updatedAt.toLocaleDateString('ms-MY',{day:'2-digit',month:'short'})} · ${meta.updatedAt.toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit'})}`);
+    const when = meta.updatedAt || new Date();
+    if(!meta.loading && !meta.error){
+      setText('#medalUpdatedAt', `Dikemas kini ${when.toLocaleDateString('ms-MY',{day:'2-digit',month:'short'})} · ${when.toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}`);
     }
-  }
-
-  function tableRowValues(row){
-    return (row?.c || []).map(c => cleanMedalText(c ? (c.f ?? c.v ?? '') : ''));
-  }
-
-  function medalColumnMap(values){
-    const normalized = values.map(normMedal);
-    const find = regs => normalized.findIndex(v => regs.some(re => re.test(v)));
-    const map = {
-      name: find([/^kontinjen$/, /^zon$/, /kontinjen/, /^pasukan$/, /^team$/]),
-      gold: find([/^emas$/, /gold/]),
-      silver: find([/^perak$/, /silver/]),
-      bronze: find([/^gangsa$/, /bronze/])
-    };
-    return Object.values(map).every(i => i >= 0) ? map : null;
   }
 
   function parseMedalTable(table){
     if(!table || !Array.isArray(table.rows)) return [];
 
-    // 1) Try GViz column labels first.
-    const labels = (table.cols || []).map((c,i) => cleanMedalText(c?.label || c?.id || `kolum ${i+1}`));
-    let map = medalColumnMap(labels);
-    let dataRows = table.rows || [];
+    const cellText = c => {
+      if(!c) return '';
+      const value = c.f ?? c.v ?? '';
+      return cleanMedalText(value);
+    };
 
-    // 2) If the sheet has a title/blank row above the header, detect the real header row automatically.
-    if(!map){
-      const probe = dataRows.slice(0,12).map(tableRowValues);
-      let headerIndex = -1;
-      for(let i=0;i<probe.length;i++){
-        const candidate = medalColumnMap(probe[i]);
-        if(candidate){ map = candidate; headerIndex = i; break; }
+    const rawRows = table.rows.map((row, rowIndex) => ({
+      rowIndex,
+      values: (row.c || []).map(cellText)
+    }));
+
+    // DEBUG STRATEGY:
+    // Do not trust GViz column labels. Instead, locate the ACTUAL header row
+    // inside the sheet itself. This supports title rows / merged cells above
+    // the table and prevents "Perak" / "Gangsa" from pointing to the wrong
+    // columns.
+    let header = null;
+
+    for(const row of rawRows){
+      const normalized = row.values.map(normMedal);
+
+      const findIndex = regs => normalized.findIndex(v => regs.some(re => re.test(v)));
+      const iName = findIndex([/^(kontinjen|zon|pasukan|team)$/, /kontinjen/, /^zon$/]);
+      const iGold = findIndex([/^emas$/, /^gold$/, /emas/]);
+      const iSilver = findIndex([/^perak$/, /^silver$/, /perak/]);
+      const iBronze = findIndex([/^gangsa$/, /^bronze$/, /gangsa/]);
+
+      if(iName >= 0 && iGold >= 0 && iSilver >= 0 && iBronze >= 0){
+        header = { rowIndex:row.rowIndex, iName, iGold, iSilver, iBronze, values:row.values };
+        break;
       }
-      if(headerIndex >= 0) dataRows = dataRows.slice(headerIndex + 1);
     }
 
-    if(!map) throw new Error('Medal header not found');
+    // Fallback: some GViz responses still expose correct column labels.
+    if(!header && Array.isArray(table.cols)){
+      const labels = table.cols.map((c,i) => cleanMedalText(c.label || c.id || `kolum ${i+1}`));
+      const findCol = regs => labels.findIndex(label => regs.some(re => re.test(normMedal(label))));
+      const iName = findCol([/kontinjen/,/^zon$/, /pasukan/,/team/]);
+      const iGold = findCol([/emas/,/gold/]);
+      const iSilver = findCol([/perak/,/silver/]);
+      const iBronze = findCol([/gangsa/,/bronze/]);
+      if(iName >= 0 && iGold >= 0 && iSilver >= 0 && iBronze >= 0){
+        header = { rowIndex:-1, iName, iGold, iSilver, iBronze, values:labels };
+      }
+    }
 
-    return dataRows.map(row => {
-      const values = tableRowValues(row);
-      const name = cleanMedalText(values[map.name]);
-      if(!name || /jumlah|total/i.test(name)) return null;
-      return {
-        name,
-        gold:medalNum(values[map.gold]),
-        silver:medalNum(values[map.silver]),
-        bronze:medalNum(values[map.bronze])
+    if(!header){
+      console.warn('Medal parser: header row not found', rawRows);
+      throw new Error('Header Kontinjen / Emas / Perak / Gangsa tidak dijumpai');
+    }
+
+    const knownZones = new Set([
+      'Zon Ibu Pejabat','Zon Tengah','Zon Utara',
+      'Zon Timur','Zon Selatan','Zon Sabah'
+    ]);
+
+    const parsed = [];
+    const startAt = header.rowIndex >= 0 ? header.rowIndex + 1 : 0;
+
+    for(const row of rawRows){
+      if(row.rowIndex < startAt) continue;
+
+      const nameRaw = row.values[header.iName] || '';
+      const canonical = canonicalMedalName(nameRaw);
+
+      // If the expected name column is blank or decorated oddly,
+      // scan the entire row for one of the 6 official zones.
+      let zoneName = knownZones.has(canonical) ? canonical : '';
+      if(!zoneName){
+        for(const value of row.values){
+          const maybe = canonicalMedalName(value);
+          if(knownZones.has(maybe)){
+            zoneName = maybe;
+            break;
+          }
+        }
+      }
+
+      if(!zoneName) continue;
+
+      const goldRaw = row.values[header.iGold] ?? '';
+      const silverRaw = row.values[header.iSilver] ?? '';
+      const bronzeRaw = row.values[header.iBronze] ?? '';
+
+      const parsedRow = {
+        name: zoneName,
+        gold: medalNum(goldRaw),
+        silver: medalNum(silverRaw),
+        bronze: medalNum(bronzeRaw)
       };
-    }).filter(Boolean);
+
+      // Keep a clear console audit so each row can be checked one-by-one
+      // without showing technical messages on the public portal.
+      console.debug('[SUKNA medal row]', {
+        sheetRow: row.rowIndex + 1,
+        zone: zoneName,
+        raw: { gold:goldRaw, silver:silverRaw, bronze:bronzeRaw },
+        parsed: parsedRow
+      });
+
+      parsed.push(parsedRow);
+    }
+
+    // Deduplicate by zone, preferring the row with the larger tally.
+    const byZone = new Map();
+    for(const row of parsed){
+      const prev = byZone.get(row.name);
+      const score = row.gold + row.silver + row.bronze;
+      const prevScore = prev ? prev.gold + prev.silver + prev.bronze : -1;
+      if(!prev || score >= prevScore) byZone.set(row.name, row);
+    }
+
+    return [...byZone.values()];
   }
 
   function loadMedalSheet(){
+    renderMedals(medalFallback,{loading:true});
     return new Promise((resolve,reject) => {
       const cb = '__suknaMedals_' + Math.random().toString(36).slice(2);
       const script = document.createElement('script');
@@ -173,33 +258,31 @@
       const cleanup = () => { script.remove(); try{ delete window[cb]; }catch(_){} };
       const timer = setTimeout(() => {
         if(settled) return;
-        settled = true; cleanup(); reject(new Error('timeout'));
+        settled = true; cleanup(); reject(new Error('Google Sheet timeout'));
       }, 15000);
       window[cb] = payload => {
         if(settled) return;
         settled = true; clearTimeout(timer); cleanup();
         try{
-          if(!payload || payload.status === 'error' || !payload.table) throw new Error('invalid response');
+          if(!payload || payload.status === 'error' || !payload.table) throw new Error('Google Sheet response invalid');
           const rows = parseMedalTable(payload.table);
-          if(!rows.length) throw new Error('no medal rows');
+          if(!rows.length) throw new Error('Tiada rekod pingat dijumpai');
           resolve(rows);
         }catch(err){ reject(err); }
       };
       script.onerror = () => {
         if(settled) return;
-        settled = true; clearTimeout(timer); cleanup(); reject(new Error('load error'));
+        settled = true; clearTimeout(timer); cleanup(); reject(new Error('Google Sheet tidak dapat dimuatkan'));
       };
-      // Correct GViz JSONP syntax; gid=0 targets the first worksheet explicitly.
-      script.src = `https://docs.google.com/spreadsheets/d/${MEDAL_SHEET_ID}/gviz/tq?gid=0&headers=0&tqx=out:json;responseHandler:${cb}&_=${Date.now()}`;
+      // No gid is supplied intentionally: the first/default worksheet is used.
+      script.src = `https://docs.google.com/spreadsheets/d/${MEDAL_SHEET_ID}/gviz/tq?headers=0&tqx=responseHandler:${cb};reqId:${Date.now()}`;
       document.body.appendChild(script);
     }).then(rows => {
-      medalLastGoodRows = rows;
       renderMedals(rows,{updatedAt:new Date()});
       return rows;
     }).catch(err => {
-      // Keep the last good/fallback data silently. No connection warning is shown to visitors.
-      console.warn('Medal sync retry:', err);
-      renderMedals(medalLastGoodRows);
+      console.warn('Medal sheet live sync failed:', err);
+      // Silent retry: keep the last displayed tally; do not show a connection warning.
       throw err;
     });
   }
@@ -209,7 +292,7 @@
     medalRefreshBtn.disabled = true;
     loadMedalSheet().catch(()=>{}).finally(() => { medalRefreshBtn.disabled = false; });
   });
-  renderMedals(medalFallback);
+  renderMedals(medalFallback,{loading:true});
   loadMedalSheet().catch(()=>{});
   medalRefreshTimer = setInterval(() => loadMedalSheet().catch(()=>{}), MEDAL_REFRESH_MS);
 
