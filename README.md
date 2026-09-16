@@ -53,3 +53,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Fix kutipan pingat live: refresh tidak lagi kosongkan jadual kepada 0 sebelum respons Google Sheet tiba. Data terakhir yang sah dikekalkan, request dicuba semula sehingga 3 kali selepas edit Sheet, dan respons lama diabaikan jika refresh baharu telah bermula.
 
 - Kutipan pingat v30: pembacaan Google Sheet kini dikunci tepat kepada B2:E8 (PASUKAN, EMAS, PERAK, GANGSA). Query GViz dijadikan unik pada setiap refresh untuk mengelakkan data lama daripada cache Google. Auto-refresh ditetapkan 15 saat.
+
+- Tambah logo Gatorade sebagai salah satu penaja Silver dalam portal utama.

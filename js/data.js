@@ -8,70 +8,87 @@ window.SUKNA_DATA = {
     {name:'Zon Sabah', total:47, male:24, female:23}
   ],
   days: [
-    {id:'16', date:'16 Sep', day:'Rabu', title:'Pendaftaran Awal', items:[['Pendaftaran Peserta','Dewan Serbaguna UPM','2.00 petang - 7.00 petang']]},
-    {id:'17', date:'17 Sep', day:'Khamis', title:'Pendaftaran, Taklimat & Majlis Perasmian', items:[
-      ['Pendaftaran Peserta','Dewan Serbaguna UPM','8.00 pagi - 12.00 tengah hari'],
-      ['Check-in Peserta Lelaki','Kolej 14 UPM','Bermula waktu pendaftaran'],
-      ["Check-in Peserta Wanita","Kolej Pendeta Za'aba UPM",'Bermula waktu pendaftaran'],
-      ['Taklimat Ketua Kontinjen','Bilik Urusetia','10.00 pagi - 1.00 tengah hari'],
-      ['Taklimat Pengurus-Pengurus Pasukan','Dewan Serbaguna UPM','10.00 pagi - 1.00 tengah hari'],
-      ['Rehat','-','1.00 petang - 2.00 petang'],
-      ['Rehearsal Majlis Perasmian & Perbarisan','Stadium UPM','4.30 petang'],
-      ['Bola Sepak - Liga Kumpulan Game 1','Padang A dan Padang B, UPM','5.00 petang'],
-      ['Makan Malam','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 petang - 8.00 malam'],
-      ['Majlis Perasmian SUKNA-21','Stadium UPM','8.00 malam - 11.00 malam · Dress code: Pakaian Kontinjen']
-    ]},
-    {id:'18', date:'18 Sep', day:'Jumaat', title:'Hari Pertandingan 1', items:[
-      ['Sarapan Pagi','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 pagi - 10.00 pagi'],
-      ['Futsal Wanita','Gelanggang Sintetik, Akademi Sukan UPM','8.00 pagi - 6.00 petang'],
-      ['Tarik Tali - Lelaki 680kg','Lapang Sasar Memanah, UPM','8.00 pagi - 3.00 petang'],
-      ['Tarik Tali - Freeweight','Lapang Sasar Memanah, UPM','8.15 pagi - 10.45 pagi'],
-      ['Bola Sepak - Liga Kumpulan Game 2','Padang A dan Padang B, UPM','8.30 pagi - 5.00 petang'],
-      ['Bola Jaring','Dewan Serbaguna UPM','8.30 pagi - 3.30 petang'],
-      ['Futsal Lelaki','Dewan Serbaguna UPM','8.30 pagi - 11.00 pagi'],
-      ['Karom Berpasukan','Bilik Terapi Sukan, Akademi Sukan UPM','8.30 pagi - 10.30 pagi'],
-      ['Makan Tengah Hari & Solat Jumaat','Khemah Makan, Perkarangan Akademi Sukan UPM','12.00 tengah hari - 3.30 petang'],
-      ['Futsal Wanita - Final','Gelanggang Sintetik, Akademi Sukan UPM','2.00 petang'],
-      ['Futsal Lelaki - Separuh Akhir','Dewan Serbaguna UPM','3.00 petang'],
-      ['Karom Berpasukan - Separuh Akhir','Bilik Terapi Sukan, Akademi Sukan UPM','3.00 petang'],
-      ['Tarik Tali - Final Lelaki 680kg','Lapang Sasar Memanah, UPM','3.00 petang'],
-      ['Tarik Tali - Final Freeweight','Lapang Sasar Memanah, UPM','3.00 petang'],
-      ['Futsal Lelaki - Akhir','Dewan Serbaguna UPM','4.00 petang'],
-      ['Karom Berpasukan - Akhir','Bilik Terapi Sukan, Akademi Sukan UPM','4.00 petang'],
-      ['Bola Jaring - Final','Dewan Serbaguna UPM','5.00 petang'],
-      ['Makan Malam','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 petang - 8.00 malam'],
-      ['Tenpin Bowling Lelaki & Wanita','IOI City Mall Putrajaya','8.00 malam']
-    ]},
-    {id:'19', date:'19 Sep', day:'Sabtu', title:'Hari Pertandingan 2', items:[
-      ['Sarapan Pagi','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 pagi - 10.00 pagi'],
-      ['Ping Pong Berpasukan','Dewan Serbaguna Akademi Sukan UPM','8.00 pagi - 5.00 petang'],
-      ['Badminton Berpasukan','Dewan Serbaguna Akademi Sukan UPM','8.00 pagi - 6.00 petang'],
-      ['Dart Berpasukan','Bilik Seminar, Akademi Sukan UPM','8.30 pagi - 10.30 pagi'],
-      ['Bola Sepak - Liga Kumpulan Game 3','Padang A dan Padang B, UPM','8.30 pagi - 5.00 petang'],
-      ['Bola Tampar Wanita','Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM','8.30 pagi - 5.30 petang'],
-      ['Bola Tampar Lelaki','Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM','9.30 pagi - 11.30 pagi'],
-      ['Dart Berpasukan - Separuh Akhir','Bilik Seminar, Akademi Sukan UPM','12.00 tengah hari'],
-      ['Makan Tengah Hari','Khemah Makan, Perkarangan Akademi Sukan UPM','12.00 tengah hari - 3.00 petang'],
-      ['Rehearsal Majlis Penutup SUKNA-21','Dewan Besar UPM','2.30 petang'],
-      ['Dart Berpasukan - Akhir','Bilik Seminar, Akademi Sukan UPM','2.30 petang'],
-      ['Bola Tampar Lelaki - Separuh Akhir','Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM','3.00 petang'],
-      ['Makan Malam','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 petang - 8.30 malam'],
-      ['Olahraga','Stadium UPM','8.00 malam'],
-      ['Olahraga Seronok-Seronok','Stadium UPM','8.00 malam · Terbuka kepada penyokong & penonton'],
-      ['Ping Pong Berpasukan - Akhir','Dewan Serbaguna Akademi Sukan UPM','8.30 malam'],
-      ['Badminton Berpasukan - Final','Dewan Serbaguna Akademi Sukan UPM','8.30 malam']
-    ]},
-    {id:'20', date:'20 Sep', day:'Ahad', title:'Final & Majlis Penutup', items:[
-      ['Sarapan Pagi','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 pagi - 10.00 pagi'],
-      ['Bola Sepak - Final','Stadium UPM','8.00 pagi'],
-      ['Sepak Takraw Berpasukan Lelaki','Dewan Serbaguna Akademi Sukan UPM','8.00 pagi - 2.00 petang'],
-      ['Bola Tampar Lelaki - Akhir','Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM','8.30 pagi'],
-      ['Rehearsal Penuh Majlis Penutup SUKNA-21','Dewan Besar UPM','11.00 pagi'],
-      ['Makan Tengah Hari','Khemah Makan, Perkarangan Akademi Sukan UPM','12.00 tengah hari - 3.00 petang'],
-      ['Bola Tampar Wanita - Akhir','Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM','2.30 petang'],
-      ['Sepak Takraw Berpasukan Lelaki - Akhir','Dewan Serbaguna Akademi Sukan UPM','3.30 petang'],
-      ['Majlis Makan Malam & Penutup SUKNA-21 Tahun 2026','Dewan Besar UPM','8.00 malam - 11.00 malam · Dress code: Baju Batik']
-    ]}
+    {
+      id:'16', date:'16 Sep', day:'Rabu', title:'Pendaftaran Awal',
+      items:[
+        ['Pendaftaran Peserta','Dewan Serbaguna UPM','2.00 petang - 7.00 petang']
+      ]
+    },
+    {
+      id:'17', date:'17 Sep', day:'Khamis', title:'Pendaftaran, Taklimat & Majlis Perasmian',
+      items:[
+        ['Pendaftaran Peserta','Dewan Serbaguna UPM','8.00 pagi - 12.00 tengah hari'],
+        ['Check-in Peserta Lelaki','Kolej 14 UPM','Bermula waktu pendaftaran'],
+        ["Check-in Peserta Wanita","Kolej Pendeta Za'aba UPM",'Bermula waktu pendaftaran'],
+        ['Taklimat Ketua Kontinjen','Bilik Urusetia','10.00 pagi - 1.00 tengah hari'],
+        ['Taklimat Pengurus-Pengurus Pasukan','Dewan Serbaguna UPM','10.00 pagi - 1.00 tengah hari'],
+        ['Rehat','-','1.00 petang - 2.00 petang'],
+        ['Rehearsal Majlis Perasmian & Perbarisan','Stadium UPM','4.30 petang'],
+        ['Bola Sepak - Liga Kumpulan Game 1','Padang A dan Padang B, UPM','5.00 petang'],
+        ['Makan Malam','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 petang - 8.00 malam'],
+        ['Majlis Perasmian SUKNA-21','Stadium UPM','8.00 malam - 11.00 malam · Dress code: Pakaian Kontinjen']
+      ]
+    },
+    {
+      id:'18', date:'18 Sep', day:'Jumaat', title:'Hari Pertandingan 1',
+      items:[
+        ['Sarapan Pagi','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 pagi - 10.00 pagi'],
+        ['Futsal Wanita','Gelanggang Sintetik, Akademi Sukan UPM','8.00 pagi - 6.00 petang'],
+        ['Tarik Tali - Lelaki 680kg','Lapang Sasar Memanah, UPM','8.00 pagi - 3.00 petang'],
+        ['Tarik Tali - Freeweight','Lapang Sasar Memanah, UPM','8.15 pagi - 10.45 pagi'],
+        ['Bola Sepak - Liga Kumpulan Game 2','Padang A dan Padang B, UPM','8.30 pagi - 5.00 petang'],
+        ['Bola Jaring','Dewan Serbaguna UPM','8.30 pagi - 3.30 petang'],
+        ['Futsal Lelaki','Dewan Serbaguna UPM','8.30 pagi - 11.00 pagi'],
+        ['Karom Berpasukan','Bilik Terapi Sukan, Akademi Sukan UPM','8.30 pagi - 10.30 pagi'],
+        ['Makan Tengah Hari & Solat Jumaat','Khemah Makan, Perkarangan Akademi Sukan UPM','12.00 tengah hari - 3.30 petang'],
+        ['Futsal Wanita - Final','Gelanggang Sintetik, Akademi Sukan UPM','2.00 petang'],
+        ['Futsal Lelaki - Separuh Akhir','Dewan Serbaguna UPM','3.00 petang'],
+        ['Karom Berpasukan - Separuh Akhir','Bilik Terapi Sukan, Akademi Sukan UPM','3.00 petang'],
+        ['Tarik Tali - Final Lelaki 680kg','Lapang Sasar Memanah, UPM','3.00 petang'],
+        ['Tarik Tali - Final Freeweight','Lapang Sasar Memanah, UPM','3.00 petang'],
+        ['Futsal Lelaki - Akhir','Dewan Serbaguna UPM','4.00 petang'],
+        ['Karom Berpasukan - Akhir','Bilik Terapi Sukan, Akademi Sukan UPM','4.00 petang'],
+        ['Bola Jaring - Final','Dewan Serbaguna UPM','5.00 petang'],
+        ['Makan Malam','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 petang - 8.00 malam'],
+        ['Tenpin Bowling Lelaki & Wanita','IOI City Mall Putrajaya','8.00 malam']
+      ]
+    },
+    {
+      id:'19', date:'19 Sep', day:'Sabtu', title:'Hari Pertandingan 2',
+      items:[
+        ['Sarapan Pagi','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 pagi - 10.00 pagi'],
+        ['Ping Pong Berpasukan','Dewan Serbaguna Akademi Sukan UPM','8.00 pagi - 5.00 petang'],
+        ['Badminton Berpasukan','Dewan Serbaguna Akademi Sukan UPM','8.00 pagi - 6.00 petang'],
+        ['Dart Berpasukan','Bilik Seminar, Akademi Sukan UPM','8.30 pagi - 10.30 pagi'],
+        ['Bola Sepak - Liga Kumpulan Game 3','Padang A dan Padang B, UPM','8.30 pagi - 5.00 petang'],
+        ['Bola Tampar Wanita','Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM','8.30 pagi - 5.30 petang'],
+        ['Bola Tampar Lelaki','Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM','9.30 pagi - 11.30 pagi'],
+        ['Dart Berpasukan - Separuh Akhir','Bilik Seminar, Akademi Sukan UPM','12.00 tengah hari'],
+        ['Makan Tengah Hari','Khemah Makan, Perkarangan Akademi Sukan UPM','12.00 tengah hari - 3.00 petang'],
+        ['Rehearsal Majlis Penutup SUKNA-21','Dewan Besar UPM','2.30 petang'],
+        ['Dart Berpasukan - Akhir','Bilik Seminar, Akademi Sukan UPM','2.30 petang'],
+        ['Bola Tampar Lelaki - Separuh Akhir','Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM','3.00 petang'],
+        ['Makan Malam','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 petang - 8.30 malam'],
+        ['Olahraga','Stadium UPM','8.00 malam'],
+        ['Olahraga Seronok-Seronok','Stadium UPM','8.00 malam · Terbuka kepada penyokong & penonton'],
+        ['Ping Pong Berpasukan - Akhir','Dewan Serbaguna Akademi Sukan UPM','8.30 malam'],
+        ['Badminton Berpasukan - Final','Dewan Serbaguna Akademi Sukan UPM','8.30 malam']
+      ]
+    },
+    {
+      id:'20', date:'20 Sep', day:'Ahad', title:'Final & Majlis Penutup',
+      items:[
+        ['Sarapan Pagi','Khemah Makan, Perkarangan Akademi Sukan UPM','6.00 pagi - 10.00 pagi'],
+        ['Bola Sepak - Final','Stadium UPM','8.00 pagi'],
+        ['Sepak Takraw Berpasukan Lelaki','Dewan Serbaguna Akademi Sukan UPM','8.00 pagi - 2.00 petang'],
+        ['Bola Tampar Lelaki - Akhir','Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM','8.30 pagi'],
+        ['Rehearsal Penuh Majlis Penutup SUKNA-21','Dewan Besar UPM','11.00 pagi'],
+        ['Makan Tengah Hari','Khemah Makan, Perkarangan Akademi Sukan UPM','12.00 tengah hari - 3.00 petang'],
+        ['Bola Tampar Wanita - Akhir','Astaka Seni & Gelanggang Serbaguna Akademi Sukan UPM','2.30 petang'],
+        ['Sepak Takraw Berpasukan Lelaki - Akhir','Dewan Serbaguna Akademi Sukan UPM','3.30 petang'],
+        ['Majlis Makan Malam & Penutup SUKNA-21 Tahun 2026','Dewan Besar UPM','8.00 malam - 11.00 malam · Dress code: Baju Batik']
+      ]
+    }
   ],
   medals: [
     {name:'Zon Ibu Pejabat', gold:0, silver:0, bronze:0},
@@ -122,7 +139,6 @@ window.SUKNA_DATA = {
   protocol: [
     ['Flow Majlis Perasmian','assets/official/flow-majlis-perasmian.webp'],
     ['Susun Atur Perbarisan','assets/official/perbarisan.webp'],
-    ['Pelan Lokasi Program – Stadium UPM','assets/official/pelan-lokasi-program-stadium-upm.webp'],
     ['Lokasi Dewan Besar','assets/official/lokasi-dewan-besar.webp'],
     ['Susun Atur Majlis Penutup','assets/official/susun-atur-penutup.webp']
   ]
