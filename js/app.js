@@ -289,7 +289,7 @@
       }).formatToParts(new Date());
       const pick = type => parts.find(p => p.type===type)?.value || '';
       const y = pick('year'), m = pick('month'), d = pick('day');
-      if(y==='2026' && m==='09' && ['16','17','18','19','20'].includes(d)) return String(Number(d));
+      if(y==='2026' && m==='09' && ['16','17','18','19','20','21'].includes(d)) return String(Number(d));
     } catch(_) {}
     return D.days[0]?.id || '16';
   }
