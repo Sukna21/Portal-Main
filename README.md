@@ -61,3 +61,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Jadual harian kini membuka tab tarikh semasa secara automatik (waktu Malaysia) jika tarikh berada dalam 16–20 September 2026. Di luar tempoh itu, tab pertama digunakan sebagai default.
 
 - Atur cara portal diselaraskan semula dengan dokumen Aturcara Penuh terkini: 16–21 September 2026, termasuk sesi-sesi penyampaian medal pada 18, 19 dan 20 September serta daftar keluar pada 21 September. Default tab tarikh semasa turut menyokong 21 September.
+
+- Atur cara kini menggabungkan semua acara yang mempunyai masa sama ke dalam satu kad, supaya paparan lebih kemas dan logik.

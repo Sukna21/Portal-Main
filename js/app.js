@@ -274,10 +274,36 @@
   function renderDay(id){
     const d = D.days.find(x=>x.id===id) || D.days[0];
     $$('.day-tab', tabs).forEach(b => b.classList.toggle('active', b.dataset.id===d.id));
+
+    // Gabungkan semua acara yang mempunyai masa yang sama ke dalam satu kad.
+    // Contoh: beberapa final pada 3.00 petang akan berkongsi satu kad masa.
+    const grouped = [];
+    const groupMap = new Map();
+    d.items.forEach(it => {
+      const timeKey = String(it[2] || '').trim();
+      if(!groupMap.has(timeKey)){
+        const group = { time:timeKey, events:[] };
+        groupMap.set(timeKey, group);
+        grouped.push(group);
+      }
+      groupMap.get(timeKey).events.push(it);
+    });
+
     dayContent.innerHTML = `
       <div class="day-card">
         <div class="day-card-head"><span>${d.date}</span><div><b>${d.day}</b><h3>${d.title}</h3></div></div>
-        <div class="timeline">${d.items.map((it,i)=>`<div class="time-item"><i>${String(i+1).padStart(2,'0')}</i><div><b>${it[0]}</b><span>${it[1]}</span><small class="event-time">⏱ ${it[2]}</small></div></div>`).join('')}</div>
+        <div class="timeline">${grouped.map((g,i)=>`
+          <div class="time-item grouped-time-item">
+            <i>${String(i+1).padStart(2,'0')}</i>
+            <div class="grouped-time-content">
+              ${g.events.map((it,idx)=>`
+                <div class="grouped-event ${idx ? 'grouped-event-separator' : ''}">
+                  <b>${it[0]}</b>
+                  <span>${it[1]}</span>
+                </div>`).join('')}
+              <small class="event-time">⏱ ${g.time}</small>
+            </div>
+          </div>`).join('')}</div>
       </div>`;
   }
   // Pilih tab tarikh semasa secara automatik apabila portal dibuka.
