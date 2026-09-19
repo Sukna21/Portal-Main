@@ -64,4 +64,4 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 
 - Atur cara kini menggabungkan semua acara yang mempunyai masa sama ke dalam satu kad, supaya paparan lebih kemas dan logik.
 
-- Kutipan pingat v35 diselaraskan dengan format Sheet urus setia terkini (A:J): Pasukan, Emas, Perak, Gangsa, Penyertaan, Jumlah Medal, Jumlah Mata dan KED. Kedudukan portal kini ikut terus kolum KED., bukan ranking yang dikira sendiri.
+- Kutipan pingat v35: portal kini membaca format B2:J8 (Pasukan, Emas, Perak, Gangsa, Jumlah, Penyertaan, Jumlah Medal, Jumlah Mata, Ked.). Kedudukan ikut kolum KED., dan paparan menambah Jumlah Medal serta Jumlah Mata.

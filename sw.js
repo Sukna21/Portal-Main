@@ -1,4 +1,4 @@
-const CACHE='sukna21-v35-20260919-medal-format';
+const CACHE='sukna21-v35-20260919-medal-points-ranking';
 const CORE=[
   './','./index.html','./css/style.css?v=20260919-medal-format-v35','./js/data.js?v=20260919-medal-format-v35','./js/app.js?v=20260919-medal-format-v35',
   './assets/sukna-logo.webp','./assets/mascot.webp','./assets/partners-strip.webp',
