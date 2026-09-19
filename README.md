@@ -63,3 +63,5 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Atur cara portal diselaraskan semula dengan dokumen Aturcara Penuh terkini: 16–21 September 2026, termasuk sesi-sesi penyampaian medal pada 18, 19 dan 20 September serta daftar keluar pada 21 September. Default tab tarikh semasa turut menyokong 21 September.
 
 - Atur cara kini menggabungkan semua acara yang mempunyai masa sama ke dalam satu kad, supaya paparan lebih kemas dan logik.
+
+- Kutipan pingat v35 diselaraskan dengan format Sheet urus setia terkini (A:J): Pasukan, Emas, Perak, Gangsa, Penyertaan, Jumlah Medal, Jumlah Mata dan KED. Kedudukan portal kini ikut terus kolum KED., bukan ranking yang dikira sendiri.

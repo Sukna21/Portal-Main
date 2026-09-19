@@ -85,44 +85,84 @@
   const canonicalMedalName = name => medalNameAliases.get(normMedal(name)) || cleanMedalText(name);
 
   function renderMedals(input, meta={}){
-    const byName = new Map((input || []).filter(Boolean).map(m => [canonicalMedalName(m.name), {
-      name: canonicalMedalName(m.name),
-      gold: medalNum(m.gold),
-      silver: medalNum(m.silver),
-      bronze: medalNum(m.bronze)
-    }]));
+    const byName = new Map((input || []).filter(Boolean).map(m => {
+      const name = canonicalMedalName(m.name);
+      return [name, {
+        name,
+        gold: medalNum(m.gold),
+        silver: medalNum(m.silver),
+        bronze: medalNum(m.bronze),
+        participation: medalNum(m.participation),
+        medalCount: medalNum(m.medalCount),
+        points: medalNum(m.points),
+        rank: medalNum(m.rank)
+      }];
+    }));
 
     const medals = medalFallback.map(base => {
-      const live = byName.get(canonicalMedalName(base.name));
-      const m = live || {...base};
-      return {...m, total:(medalNum(m.gold)+medalNum(m.silver)+medalNum(m.bronze))};
+      const name = canonicalMedalName(base.name);
+      const live = byName.get(name);
+      const fallback = {
+        name,
+        gold: medalNum(base.gold),
+        silver: medalNum(base.silver),
+        bronze: medalNum(base.bronze),
+        participation: 0,
+        medalCount: medalNum(base.medalCount),
+        points: medalNum(base.points),
+        rank: medalNum(base.rank)
+      };
+      return live || fallback;
     });
 
-    // Include any additional contingents that may exist in the sheet.
+    // Include additional rows if the Sheet is expanded later.
     byName.forEach((m,name) => {
-      if(!medals.some(x => canonicalMedalName(x.name) === name)) medals.push({...m, total:m.gold+m.silver+m.bronze});
+      if(!medals.some(x => canonicalMedalName(x.name) === name)) medals.push(m);
     });
 
-    const medalHasData = medals.some(m => m.total > 0);
-    const medalSorted = [...medals].sort((a,b) => (b.gold-a.gold) || (b.silver-a.silver) || (b.bronze-a.bronze) || a.name.localeCompare(b.name,'ms'));
-    const totals = medals.reduce((acc,m) => { acc.gold += m.gold; acc.silver += m.silver; acc.bronze += m.bronze; acc.total += m.total; return acc; }, {gold:0,silver:0,bronze:0,total:0});
+    // Kedudukan rasmi ikut kolum KED. dalam Google Sheet.
+    // Jika KED. belum diisi, baris diletakkan di bawah tanpa kita mereka ranking sendiri.
+    const medalSorted = [...medals].sort((a,b) => {
+      const ar = a.rank > 0 ? a.rank : 999;
+      const br = b.rank > 0 ? b.rank : 999;
+      return (ar-br) || (b.points-a.points) || a.name.localeCompare(b.name,'ms');
+    });
+
+    const totals = medals.reduce((acc,m) => {
+      acc.gold += m.gold;
+      acc.silver += m.silver;
+      acc.bronze += m.bronze;
+      acc.medalCount += m.medalCount;
+      acc.points += m.points;
+      return acc;
+    }, {gold:0,silver:0,bronze:0,medalCount:0,points:0});
+
     const setText = (id, value) => { const el=$(id); if(el) el.textContent=value; };
     setText('#medalGoldTotal', totals.gold);
     setText('#medalSilverTotal', totals.silver);
     setText('#medalBronzeTotal', totals.bronze);
-    setText('#medalGrandTotal', totals.total);
+    setText('#medalGrandTotal', totals.medalCount);
+    setText('#medalPointsTotal', totals.points);
 
     const medalStandings = $('#medalStandings');
     if(medalStandings){
-      medalStandings.innerHTML = medalSorted.map((m,i) => `
-        <div class="medal-row ${m.total>0?'has-medals':'empty-medals'}">
-          <span class="medal-rank">${medalHasData ? i+1 : '–'}</span>
-          <div class="medal-team"><b>${m.name}</b><small>${m.total>0 ? `${m.total} pingat` : 'Belum ada pingat disahkan'}</small></div>
+      medalStandings.innerHTML = medalSorted.map(m => {
+        const hasData = m.gold || m.silver || m.bronze || m.medalCount || m.points || m.rank;
+        const rankLabel = m.rank > 0 ? m.rank : '–';
+        return `
+        <div class="medal-row ${hasData?'has-medals':'empty-medals'} ${m.rank>0?`rank-${m.rank}`:''}">
+          <span class="medal-rank">${rankLabel}</span>
+          <div class="medal-team">
+            <b>${m.name}</b>
+            <small>Penyertaan: ${m.participation}</small>
+          </div>
           <span class="medal-count gold"><i></i><b>${m.gold}</b></span>
           <span class="medal-count silver"><i></i><b>${m.silver}</b></span>
           <span class="medal-count bronze"><i></i><b>${m.bronze}</b></span>
-          <span class="medal-total"><b>${m.total}</b></span>
-        </div>`).join('');
+          <span class="medal-total medal-total-sheet"><b>${m.medalCount}</b></span>
+          <span class="medal-points"><b>${m.points}</b></span>
+        </div>`;
+      }).join('');
     }
 
     const when = meta.updatedAt || new Date();
@@ -147,23 +187,29 @@
     const rows = [];
     for(const row of table.rows){
       const c = row.c || [];
-      // Because the request below is locked to range B2:E8 with headers=1:
-      // c[0] = PASUKAN, c[1] = EMAS, c[2] = PERAK, c[3] = GANGSA.
-      const teamRaw = cleanMedalText(c[0]?.f ?? c[0]?.v ?? '');
+
+      // Sumber Sheet terkini dikunci kepada A2:J8:
+      // A BIL | B PASUKAN | C EMAS | D PERAK | E GANGSA |
+      // F JUMLAH | G PENYERTAAN | H JUMLAH MEDAL | I JUMLAH MATA | J KED.
+      const teamRaw = cleanMedalText(c[1]?.f ?? c[1]?.v ?? '');
       const teamKey = normMedal(teamRaw);
       const name = exactZones[teamKey];
       if(!name) continue;
 
       rows.push({
         name,
-        gold: medalNum(c[1]?.f ?? c[1]?.v ?? ''),
-        silver: medalNum(c[2]?.f ?? c[2]?.v ?? ''),
-        bronze: medalNum(c[3]?.f ?? c[3]?.v ?? '')
+        gold: medalNum(c[2]?.f ?? c[2]?.v ?? ''),
+        silver: medalNum(c[3]?.f ?? c[3]?.v ?? ''),
+        bronze: medalNum(c[4]?.f ?? c[4]?.v ?? ''),
+        participation: medalNum(c[6]?.f ?? c[6]?.v ?? ''),
+        medalCount: medalNum(c[7]?.f ?? c[7]?.v ?? ''),
+        points: medalNum(c[8]?.f ?? c[8]?.v ?? ''),
+        rank: medalNum(c[9]?.f ?? c[9]?.v ?? '')
       });
     }
 
     if(rows.length < 6){
-      console.warn('Medal exact-range parser received fewer than 6 zones:', rows);
+      console.warn('Medal/ranking parser received fewer than 6 zones:', rows);
     }
     return rows;
   }
@@ -207,17 +253,15 @@
         reject(new Error('Google Sheet tidak dapat dimuatkan'));
       };
 
-      // Exact source used by the sheet shown by the user:
-      // B2:E8 = PASUKAN | EMAS | PERAK | GANGSA + six official zones.
-      //
-      // The query label changes on every request. This is deliberate:
-      // Google GViz can cache the same query for a short period even after cells
-      // are edited. A unique query forces a fresh evaluation of the sheet.
+      // Format Google Sheet terkini:
+      // A BIL | B PASUKAN | C EMAS | D PERAK | E GANGSA | F JUMLAH |
+      // G PENYERTAAN | H JUMLAH MEDAL | I JUMLAH MATA | J KED.
+      // Query unik pada setiap refresh untuk mengurangkan risiko cache GViz lama.
       const stamp = Date.now();
-      const tq = `select B,C,D,E where B is not null label B 'PASUKAN_${stamp}', C 'EMAS_${stamp}', D 'PERAK_${stamp}', E 'GANGSA_${stamp}'`;
+      const tq = `select A,B,C,D,E,F,G,H,I,J where B is not null label A 'BIL_${stamp}', B 'PASUKAN_${stamp}', C 'EMAS_${stamp}', D 'PERAK_${stamp}', E 'GANGSA_${stamp}', F 'JUMLAH_${stamp}', G 'PENYERTAAN_${stamp}', H 'JUMLAH_MEDAL_${stamp}', I 'JUMLAH_MATA_${stamp}', J 'KED_${stamp}'`;
       const params = new URLSearchParams({
         gid: '0',
-        range: 'B2:E8',
+        range: 'A2:J8',
         headers: '1',
         tq,
         tqx: `responseHandler:${cb};reqId:${stamp}`

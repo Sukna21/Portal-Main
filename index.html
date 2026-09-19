@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#e31e24" />
   <meta name="description" content="Portal Rasmi SUKNA XXI Selangor 2026 - jadual, lokasi, acara, penginapan, peraturan dan maklumat kecemasan." />
   <title>Portal Utama SUKNA XXI Selangor 2026</title>
-  <link rel="manifest" href="manifest.webmanifest?v=20260917-aturcara-v34" />
+  <link rel="manifest" href="manifest.webmanifest?v=20260919-medal-format-v35" />
   <link rel="icon" href="assets/mascot.webp" type="image/webp" />
-  <link rel="stylesheet" href="css/style.css?v=20260917-aturcara-v34" />
+  <link rel="stylesheet" href="css/style.css?v=20260919-medal-format-v35" />
 </head>
 <body>
   <a class="skip-link" href="#main">Langkau ke kandungan</a>
@@ -166,8 +166,8 @@
         <div class="section-head">
           <div>
             <span class="kicker">KEDUDUKAN SEMASA</span>
-            <h2>Kutipan Pingat Keseluruhan</h2>
-            <p>Kedudukan kontinjen berdasarkan jumlah pingat emas, perak dan gangsa yang telah disahkan oleh urus setia.</p>
+            <h2>Kutipan Pingat & Kedudukan Semasa</h2>
+            <p>Paparan diselaraskan terus dengan format urus setia: kutipan emas, perak, gangsa, jumlah medal, jumlah mata dan kedudukan rasmi.</p>
           </div>
           <div class="medal-tools">
             <button class="medal-refresh-btn" id="medalRefreshBtn" type="button">↻ Kemaskini</button>
@@ -178,16 +178,17 @@
           <article class="medal-summary-card gold"><span class="medal-icon">●</span><div><small>Emas</small><b id="medalGoldTotal">0</b></div></article>
           <article class="medal-summary-card silver"><span class="medal-icon">●</span><div><small>Perak</small><b id="medalSilverTotal">0</b></div></article>
           <article class="medal-summary-card bronze"><span class="medal-icon">●</span><div><small>Gangsa</small><b id="medalBronzeTotal">0</b></div></article>
-          <article class="medal-summary-card total"><span class="medal-icon">★</span><div><small>Jumlah Pingat</small><b id="medalGrandTotal">0</b></div></article>
+          <article class="medal-summary-card total"><span class="medal-icon">★</span><div><small>Jumlah Medal</small><b id="medalGrandTotal">0</b></div></article>
+          <article class="medal-summary-card points"><span class="medal-icon">◆</span><div><small>Jumlah Mata</small><b id="medalPointsTotal">0</b></div></article>
         </div>
 
         <div class="medal-board">
           <div class="medal-board-head">
-            <div><b>Kedudukan Kontinjen</b><span>Susunan akan berubah secara automatik apabila kutipan pingat dikemas kini.</span></div>
+            <div><b>Kedudukan Kontinjen</b><span>Kedudukan mengikut kolum KED. dan jumlah mata rasmi dalam Google Sheet urus setia.</span></div>
             <div class="medal-board-meta"><small id="medalUpdatedAt">Kemas kini automatik setiap 60 saat</small></div>
           </div>
           <div class="medal-table-head" aria-hidden="true">
-            <span>Ked.</span><span>Kontinjen</span><span>Emas</span><span>Perak</span><span>Gangsa</span><span>Jumlah</span>
+            <span>Ked.</span><span>Kontinjen</span><span>Emas</span><span>Perak</span><span>Gangsa</span><span>Jumlah Medal</span><span>Mata</span>
           </div>
           <div class="medal-standings" id="medalStandings"></div>
         </div>
@@ -380,7 +381,7 @@
     <div class="modal-panel"><button class="modal-close" data-close-modal aria-label="Tutup">×</button><div id="modalBody"></div></div>
   </div>
 
-  <script src="js/data.js?v=20260917-aturcara-v34"></script>
-  <script src="js/app.js?v=20260917-aturcara-v34"></script>
+  <script src="js/data.js?v=20260919-medal-format-v35"></script>
+  <script src="js/app.js?v=20260919-medal-format-v35"></script>
 </body>
 </html>
