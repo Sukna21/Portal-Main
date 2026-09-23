@@ -1,7 +1,7 @@
-const CACHE='sukna21-postevent-v36-20260923';
+const CACHE='sukna21-postevent-v37-20260923-gallery-by-sport';
 const CORE=[
   './','./index.html','./results.html','./highlights.html','./archive.html',
-  './css/style.css?v=20260923-postevent-v36','./js/data.js?v=20260923-postevent-v36','./js/app.js?v=20260923-postevent-v36','./js/postevent.js?v=20260923-postevent-v36',
+  './css/style.css?v=20260923-gallery-by-sport-v37','./js/data.js?v=20260923-gallery-by-sport-v37','./js/app.js?v=20260923-gallery-by-sport-v37','./js/postevent.js?v=20260923-gallery-by-sport-v37',
   './assets/sukna-logo.webp','./assets/mascot.webp','./assets/partners-strip.webp',
   './assets/postevent/juara-keseluruhan.webp','./assets/postevent/olahragawan-olahragawati.webp',
   './assets/official/majlis-perasmian.webp','./assets/official/majlis-penutupan.webp',

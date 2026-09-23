@@ -73,3 +73,12 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Keputusan akhir dibekukan berdasarkan workbook rasmi.
 - Anugerah khas: Juara Keseluruhan Zon Ibu Pejabat; Perbarisan Terbaik Zon Timur; Olahragawan Muhammad Tajjudin bin Roslani (Zon Tengah); Olahragawati Airma Ayusneda binti Ibrahim (Zon Ibu Pejabat).
 - Galeri Drive tersedia untuk Perasmian, Penutup, Story dan Montaj. Struktur galeri sukan telah disediakan untuk kemas kini seterusnya.
+
+
+## v37 — Galeri mengikut acara sukan
+- Folder Game disusun semula di portal berdasarkan acara sukan, bukan hari.
+- Bola Sepak menggabungkan album Khamis + Final Ahad.
+- Bola Tampar Wanita menggabungkan album Sabtu + Ahad + Final.
+- Tarik Tali menggabungkan 680kg dan Freeweight di bawah satu kategori galeri.
+- Penyampaian medal dipisahkan sebagai bahagian khas.
+- Semua pautan menuju terus ke folder Google Drive rasmi.
