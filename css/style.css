@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap');
 :root{
   --red:#e31e24;
   --red-dark:#b90f18;
@@ -176,9 +177,9 @@ button,input{font:inherit}
  linear-gradient(135deg,#fffaf0,#f6ead4);pointer-events:none}
 .post-hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.86fr);align-items:center;gap:46px;padding:66px 0}
 .post-pill{display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #eadfc9;font-size:.72rem;font-weight:950;letter-spacing:.08em;color:#655c4f}
-.post-hero-copy h1{font-size:clamp(4.4rem,8vw,7.8rem);line-height:.79;margin:22px 0 22px;letter-spacing:-.07em;color:#191713}
-.post-hero-copy h1 em{font-style:normal;color:var(--red)}
-.post-hero-copy h1 strong{font-size:.48em;letter-spacing:-.04em}
+.post-hero-copy h1{font-family:'Teko',Impact,'Arial Black',sans-serif;font-size:clamp(5.2rem,9.2vw,8.6rem);line-height:.78;margin:18px 0 16px;letter-spacing:.01em;color:#171512;text-transform:uppercase}
+.post-hero-copy h1 em{font-style:normal;color:var(--red);text-shadow:0 3px 0 rgba(0,0,0,.08)}
+.post-hero-copy h1 strong{display:block;font-family:'Barlow Condensed',Inter,ui-sans-serif,sans-serif;font-size:.42em;letter-spacing:.03em;line-height:.9;text-transform:uppercase;color:#111b22;margin-top:6px}
 .post-hero-lead{max-width:670px;font-size:1.06rem;line-height:1.75;color:#675f54}
 .post-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
 .champion-visual{position:relative;border-radius:28px;overflow:hidden;border:1px solid #e3d3b5;background:#12100e;box-shadow:0 30px 60px rgba(57,43,19,.18);transform:rotate(1deg)}
@@ -287,7 +288,7 @@ button,input{font:inherit}
   .gallery-sport-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:700px){
-  .postevent-status{display:none}.post-hero-grid{padding:42px 0;gap:28px}.post-hero-copy h1{font-size:4.6rem}.post-hero-copy h1 strong{font-size:.52em}
+  .postevent-status{display:none}.post-hero-grid{padding:42px 0;gap:28px}.post-hero-copy h1{font-family:'Teko',Impact,'Arial Black',sans-serif;font-size:clamp(5.2rem,9.2vw,8.6rem);line-height:.78;margin:18px 0 16px;letter-spacing:.01em;color:#171512;text-transform:uppercase}.post-hero-copy h1 strong{display:block;font-family:'Barlow Condensed',Inter,ui-sans-serif,sans-serif;font-size:.42em;letter-spacing:.03em;line-height:.9;text-transform:uppercase;color:#111b22;margin-top:6px}
   .post-stats-grid{grid-template-columns:1fr 1fr}.post-stats-grid article:nth-child(2){border-right:0}.post-stats-grid article:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.12)}
   .final-rank-row{grid-template-columns:42px 1fr 58px 60px;padding:12px 8px;gap:6px}.final-rank-team small{font-size:.62rem}.final-rank-medals,.final-rank-points{font-size:.95rem}
   .award-layout{grid-template-columns:1fr}.award-simple{grid-column:auto}.award-feature img{height:auto}
@@ -301,7 +302,7 @@ button,input{font:inherit}
 }
 @media(max-width:480px){
   .portal-tabs-inner{padding-left:0;padding-right:0}.portal-tabs a{padding:9px 12px;font-size:.68rem}
-  .post-hero-copy h1{font-size:3.8rem}.post-hero-lead{font-size:.95rem}
+  .post-hero-copy h1{font-family:'Teko',Impact,'Arial Black',sans-serif;font-size:clamp(5.2rem,9.2vw,8.6rem);line-height:.78;margin:18px 0 16px;letter-spacing:.01em;color:#171512;text-transform:uppercase}.post-hero-lead{font-size:.95rem}
   .post-hero-actions{display:grid;grid-template-columns:1fr 1fr}.post-hero-actions .btn{padding-inline:10px}
   .gallery-sport-grid{grid-template-columns:1fr}
 }
@@ -490,3 +491,14 @@ button,input{font:inherit}
 .parade-card > div{background:linear-gradient(180deg,#fff,#fff7ea)}
 .album-grid.four-col{}
 @media(min-width:1100px){.album-grid{grid-template-columns:repeat(4,1fr)} .album-card img{height:230px}}
+
+
+/* v40 - Hero font refinement */
+.post-hero-copy .eyebrow-pill{font-family:'Barlow Condensed',Inter,ui-sans-serif,sans-serif;letter-spacing:.11em}
+.post-hero-copy h1{max-width:8.2ch}
+.post-hero-copy h1 strong{max-width:11ch}
+.post-hero-copy h1 em{display:inline-block;transform:translateY(-1px)}
+.brandbar-title b{font-family:'Barlow Condensed',Inter,ui-sans-serif,sans-serif;letter-spacing:.02em}
+@media(max-width:760px){
+  .post-hero-copy h1{max-width:none}
+}

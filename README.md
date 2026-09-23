@@ -94,3 +94,8 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Poster rasmi Johan Perbarisan Zon Timur dimasukkan ke dalam portal.
 - Dipaparkan pada bahagian Anugerah & Pencapaian Khas di laman utama.
 - Ditambah juga sebagai kad poster dalam halaman Sorotan & Galeri.
+
+
+## v40 — Hero font refinement
+- Tajuk utama `SUKNA XXI / Selangor 2026` ditukar kepada gaya font yang lebih sporty dan lebih dekat dengan feel visual SUKNA.
+- Guna gabungan Teko + Barlow Condensed untuk rupa yang lebih kuat, padat dan serasi dengan identiti sukan.
