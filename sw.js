@@ -1,7 +1,7 @@
-const CACHE='sukna21-postevent-v40-20260923-hero-font';
+const CACHE='sukna21-postevent-v41-hero-option1';
 const CORE=[
   './','./index.html','./results.html','./highlights.html','./archive.html',
-  './css/style.css?v=20260923-hero-font-v40','./js/data.js?v=20260923-hero-font-v40','./js/app.js?v=20260923-hero-font-v40','./js/postevent.js?v=20260923-hero-font-v40',
+  './css/style.css?v=20260923-hero-option1-v41','./js/data.js?v=20260923-hero-option1-v41','./js/app.js?v=20260923-hero-option1-v41','./js/postevent.js?v=20260923-hero-option1-v41',
   './assets/sukna-logo.webp','./assets/mascot.webp','./assets/partners-strip.webp',
   './assets/postevent/juara-keseluruhan.webp','./assets/postevent/olahragawan-olahragawati.webp',
   './assets/official/majlis-perasmian.webp','./assets/official/majlis-penutupan.webp',

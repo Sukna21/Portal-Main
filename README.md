@@ -99,3 +99,9 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 ## v40 — Hero font refinement
 - Tajuk utama `SUKNA XXI / Selangor 2026` ditukar kepada gaya font yang lebih sporty dan lebih dekat dengan feel visual SUKNA.
 - Guna gabungan Teko + Barlow Condensed untuk rupa yang lebih kuat, padat dan serasi dengan identiti sukan.
+
+
+## v41 — Hero pilihan 1
+- Tajuk hero utama ditukar kepada gaya mockup Pilihan 1.
+- Typography dibuat lebih bold, condensed dan sporty supaya lebih dekat dengan identiti visual SUKNA.
+- Badge tarikh dan susun atur hero turut dikemaskini supaya lebih premium dan kemas.
