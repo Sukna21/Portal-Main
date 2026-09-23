@@ -110,12 +110,12 @@ window.SUKNA_DATA = {
     }
   ],
   medals: [
-    {name:'Zon Ibu Pejabat', gold:0, silver:0, bronze:0},
-    {name:'Zon Tengah', gold:0, silver:0, bronze:0},
-    {name:'Zon Utara', gold:0, silver:0, bronze:0},
-    {name:'Zon Timur', gold:0, silver:0, bronze:0},
-    {name:'Zon Selatan', gold:0, silver:0, bronze:0},
-    {name:'Zon Sabah', gold:0, silver:0, bronze:0}
+    {name:'Zon Ibu Pejabat', gold:5, silver:5, bronze:3, medalTotal:15, points:114, rank:1},
+    {name:'Zon Timur', gold:4, silver:5, bronze:1, medalTotal:10, points:97, rank:2},
+    {name:'Zon Tengah', gold:4, silver:1, bronze:3, medalTotal:15, points:75, rank:3},
+    {name:'Zon Selatan', gold:1, silver:2, bronze:4, medalTotal:7, points:52, rank:4},
+    {name:'Zon Utara', gold:1, silver:1, bronze:3, medalTotal:5, points:40, rank:5},
+    {name:'Zon Sabah', gold:0, silver:1, bronze:1, medalTotal:2, points:18, rank:6}
   ],
   medalUpdatedAt: '',
   sports: [

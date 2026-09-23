@@ -65,3 +65,11 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Atur cara kini menggabungkan semua acara yang mempunyai masa sama ke dalam satu kad, supaya paparan lebih kemas dan logik.
 
 - Kutipan pingat v35: portal kini membaca format B2:J8 (Pasukan, Emas, Perak, Gangsa, Jumlah, Penyertaan, Jumlah Medal, Jumlah Mata, Ked.). Kedudukan ikut kolum KED., dan paparan menambah Jumlah Medal serta Jumlah Mata.
+
+
+## Post-Event v36
+- Portal dipecahkan kepada 4 tab: Utama, Keputusan Akhir, Sorotan & Galeri, Arkib SUKNA XXI.
+- Portal asal dikekalkan pada `archive.html`.
+- Keputusan akhir dibekukan berdasarkan workbook rasmi.
+- Anugerah khas: Juara Keseluruhan Zon Ibu Pejabat; Perbarisan Terbaik Zon Timur; Olahragawan Muhammad Tajjudin bin Roslani (Zon Tengah); Olahragawati Airma Ayusneda binti Ibrahim (Zon Ibu Pejabat).
+- Galeri Drive tersedia untuk Perasmian, Penutup, Story dan Montaj. Struktur galeri sukan telah disediakan untuk kemas kini seterusnya.

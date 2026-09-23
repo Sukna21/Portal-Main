@@ -1,58 +1,48 @@
-const CACHE='sukna21-v35-20260919-medal-points-ranking';
+const CACHE='sukna21-postevent-v36-20260923';
 const CORE=[
-  './','./index.html','./css/style.css?v=20260919-medal-format-v35','./js/data.js?v=20260919-medal-format-v35','./js/app.js?v=20260919-medal-format-v35',
+  './','./index.html','./results.html','./highlights.html','./archive.html',
+  './css/style.css?v=20260923-postevent-v36','./js/data.js?v=20260923-postevent-v36','./js/app.js?v=20260923-postevent-v36','./js/postevent.js?v=20260923-postevent-v36',
   './assets/sukna-logo.webp','./assets/mascot.webp','./assets/partners-strip.webp',
-  './assets/ui/official-cover.webp','./assets/ui/stadium-page.webp','./assets/ui/accom-page.webp','./assets/icons/sepak-takraw.svg','./assets/official/majlis-perasmian.webp','./assets/official/majlis-penutupan.webp','./assets/official/tarikh-penting.webp','./assets/official/jadual-acara.webp','./assets/sponsors/logos/platinum/mbi.webp','./assets/sponsors/logos/platinum/kusel.webp','./assets/sponsors/logos/platinum/sd-guthrie.webp','./assets/sponsors/logos/platinum/ytsb.webp','./assets/sponsors/logos/gold/kdeb.webp','./assets/sponsors/logos/gold/scientex-bestari-jaya.webp','./assets/sponsors/logos/gold/sime-darby-property.webp','./assets/sponsors/logos/gold/alam-rancang.webp','./assets/sponsors/logos/gold/landasan-lumayan.webp','./assets/sponsors/logos/gold/avaland.webp','./assets/sponsors/logos/silver/cyberview.webp','./assets/sponsors/logos/silver/pnsb.webp','./assets/sponsors/logos/silver/worldwide-holdings.webp','./assets/sponsors/logos/silver/uem-sunrise.webp','./assets/sponsors/logos/silver/osk-property.webp','./assets/sponsors/logos/silver/gatorade.webp','./assets/sponsors/platinum.webp','./assets/sponsors/gold.webp','./assets/sponsors/silver.webp','./assets/official/flow-majlis-perasmian.webp','./assets/official/pelan-lokasi-program-stadium-upm.webp'
+  './assets/postevent/juara-keseluruhan.webp','./assets/postevent/olahragawan-olahragawati.webp',
+  './assets/official/majlis-perasmian.webp','./assets/official/majlis-penutupan.webp',
+  './assets/ui/stadium-page.webp','./assets/ui/accom-page.webp'
 ];
 
 self.addEventListener('install', event => {
   self.skipWaiting();
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).catch(()=>{}));
 });
-
 self.addEventListener('activate', event => {
   event.waitUntil((async()=>{
-    const keys = await caches.keys();
-    await Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)));
+    const keys=await caches.keys();
+    await Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)));
     await self.clients.claim();
   })());
 });
-
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  const req = event.request;
-  const url = new URL(req.url);
-  const accept = req.headers.get('accept') || '';
-  const isNav = req.mode === 'navigate' || accept.includes('text/html');
-  const isCode = req.destination === 'script' || req.destination === 'style' || /\.(js|css)$/.test(url.pathname);
-
-  if (isNav || isCode) {
-    // Network-first for pages, JS and CSS so mobile Safari does not keep stale schedules.
+  if(event.request.method!=='GET') return;
+  const req=event.request, url=new URL(req.url);
+  const accept=req.headers.get('accept')||'';
+  const isNav=req.mode==='navigate'||accept.includes('text/html');
+  const isCode=req.destination==='script'||req.destination==='style'||/\.(js|css)$/.test(url.pathname);
+  if(isNav||isCode){
     event.respondWith((async()=>{
-      try {
-        const fresh = await fetch(req, {cache:'no-store'});
-        if (fresh && fresh.ok) {
-          const cache = await caches.open(CACHE);
-          cache.put(req, fresh.clone());
-        }
+      try{
+        const fresh=await fetch(req,{cache:'no-store'});
+        if(fresh&&fresh.ok) (await caches.open(CACHE)).put(req,fresh.clone());
         return fresh;
-      } catch (e) {
-        return (await caches.match(req)) || (isNav ? await caches.match('./index.html') : null) || Response.error();
+      }catch(e){
+        return (await caches.match(req))||(isNav?await caches.match('./index.html'):null)||Response.error();
       }
     })());
     return;
   }
-
-  // Stale-while-revalidate for images and other static assets.
   event.respondWith((async()=>{
-    const cached = await caches.match(req);
-    const network = fetch(req, {cache:'no-cache'}).then(async resp => {
-      if (resp && resp.ok) {
-        const cache = await caches.open(CACHE);
-        cache.put(req, resp.clone());
-      }
+    const cached=await caches.match(req);
+    const network=fetch(req,{cache:'no-cache'}).then(async resp=>{
+      if(resp&&resp.ok) (await caches.open(CACHE)).put(req,resp.clone());
       return resp;
     }).catch(()=>null);
-    return cached || (await network) || Response.error();
+    return cached||(await network)||Response.error();
   })());
 });

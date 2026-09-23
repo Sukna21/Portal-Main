@@ -305,9 +305,11 @@
     medalRefreshBtn.disabled = true;
     loadMedalSheet().catch(()=>{}).finally(() => { medalRefreshBtn.disabled = false; });
   });
-  renderMedals(medalFallback,{loading:true});
-  loadMedalSheet().catch(()=>{});
-  medalRefreshTimer = setInterval(() => loadMedalSheet().catch(()=>{}), MEDAL_REFRESH_MS);
+  renderMedals(medalFallback,{loading:!window.SUKNA_ARCHIVE_MODE});
+  if(!window.SUKNA_ARCHIVE_MODE){
+    loadMedalSheet().catch(()=>{});
+    medalRefreshTimer = setInterval(() => loadMedalSheet().catch(()=>{}), MEDAL_REFRESH_MS);
+  }
 
   // Daily schedule
   const tabs = $('#dayTabs'), dayContent = $('#dayContent');

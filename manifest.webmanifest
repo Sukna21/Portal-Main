@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#fffbe8",
   "theme_color": "#e31e24",
-  "description": "Portal utama SUKNA XXI Selangor 2026",
+  "description": "Portal rasmi pasca-kejohanan dan arkib SUKNA XXI Selangor 2026",
   "icons": [
     {"src":"assets/mascot.webp","sizes":"any","type":"image/webp","purpose":"any"}
   ]
