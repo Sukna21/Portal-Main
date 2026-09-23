@@ -82,3 +82,15 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Tarik Tali menggabungkan 680kg dan Freeweight di bawah satu kategori galeri.
 - Penyampaian medal dipisahkan sebagai bahagian khas.
 - Semua pautan menuju terus ke folder Google Drive rasmi.
+
+
+## v38 — Story & Montaj preview cards
+- Kad Story dan Montaj direka semula menjadi lebih visual dan premium.
+- Gaya kad menggunakan backdrop preview, overlay sinematik, label jelas dan CTA yang lebih ketara.
+- Untuk masa ini, preview menggunakan visual representatif daripada aset portal sedia ada supaya paparan lebih menarik dan konsisten.
+
+
+## v39 — Poster Johan Perbarisan
+- Poster rasmi Johan Perbarisan Zon Timur dimasukkan ke dalam portal.
+- Dipaparkan pada bahagian Anugerah & Pencapaian Khas di laman utama.
+- Ditambah juga sebagai kad poster dalam halaman Sorotan & Galeri.

@@ -205,7 +205,7 @@ button,input{font:inherit}
 .final-rank-medals small,.final-rank-points small{font-size:.58rem;color:#8a8174;text-transform:uppercase;letter-spacing:.06em}
 .final-rank-points{color:var(--red)}
 
-.award-layout{display:grid;grid-template-columns:1.1fr 1fr .7fr;gap:18px}
+.award-layout{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:18px}
 .award-feature,.award-simple{background:#fff;border:1px solid #eadfc9;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-soft)}
 .award-feature img{width:100%;height:290px;object-fit:cover;display:block}
 .award-feature>div{padding:18px}
@@ -361,3 +361,132 @@ button,input{font:inherit}
   .sport-gallery-grid{grid-template-columns:1fr}
   .medal-album-grid{grid-template-columns:1fr}
 }
+
+
+/* =========================================================
+   v38 - Story & Montaj cards dengan gaya preview
+   ========================================================= */
+.cinema-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.cinema-card{
+  position:relative;
+  min-height:360px;
+  border-radius:28px;
+  overflow:hidden;
+  display:block;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 26px 60px rgba(0,0,0,.22);
+  isolation:isolate;
+}
+.cinema-card:hover{transform:translateY(-4px)}
+.cinema-backdrop{
+  position:absolute; inset:0;
+  background-size:cover;
+  background-position:center;
+  transform:scale(1.02);
+}
+.story-backdrop{
+  background-image:url('../assets/official/majlis-perasmian.webp');
+}
+.montaj-backdrop{
+  background-image:url('../assets/postevent/juara-keseluruhan.webp');
+}
+.cinema-overlay{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(180deg,rgba(15,14,12,.22),rgba(15,14,12,.38) 30%,rgba(15,14,12,.88) 100%);
+  z-index:1;
+}
+.cinema-topline{
+  position:absolute; top:18px; left:18px; right:18px;
+  display:flex; gap:8px; flex-wrap:wrap; z-index:3;
+}
+.cinema-chip{
+  display:inline-flex; align-items:center;
+  padding:7px 11px; border-radius:999px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);
+  font-size:.63rem; font-weight:950; letter-spacing:.08em;
+  color:#fff;
+}
+.cinema-chip.alt{background:rgba(246,197,21,.18); color:#ffe48a}
+.cinema-play{
+  position:absolute;
+  left:22px; top:96px;
+  width:70px; height:70px; border-radius:24px;
+  display:grid; place-items:center;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(14px);
+  font-size:2rem; z-index:3;
+  box-shadow:0 10px 30px rgba(0,0,0,.16);
+}
+.cinema-content{
+  position:absolute; left:22px; right:22px; bottom:22px;
+  z-index:3;
+}
+.cinema-content small{
+  display:block;
+  font-size:.64rem;
+  font-weight:950;
+  letter-spacing:.1em;
+  color:#f8d761;
+  margin-bottom:8px;
+}
+.cinema-content h3{
+  margin:0 0 9px;
+  font-size:2rem;
+  line-height:.95;
+  letter-spacing:-.04em;
+  text-shadow:0 5px 18px rgba(0,0,0,.25);
+}
+.cinema-content p{
+  margin:0;
+  max-width:92%;
+  color:#ece6dd;
+  font-size:.88rem;
+  line-height:1.6;
+}
+.cinema-meta{
+  margin-top:16px;
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+  padding-top:13px;
+  border-top:1px solid rgba(255,255,255,.18);
+}
+.cinema-meta span{
+  color:#d7cfc5;
+  font-size:.68rem;
+  font-weight:700;
+}
+.cinema-meta b{
+  color:#fff;
+  font-size:.72rem;
+  font-weight:950;
+  letter-spacing:.05em;
+}
+@media(max-width:860px){
+  .cinema-grid{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .cinema-card{min-height:330px}
+  .cinema-play{
+    top:78px; left:18px;
+    width:58px; height:58px; border-radius:18px; font-size:1.55rem;
+  }
+  .cinema-content{left:18px; right:18px; bottom:18px}
+  .cinema-content h3{font-size:1.65rem}
+  .cinema-content p{max-width:100%; font-size:.82rem}
+  .cinema-meta{flex-direction:column; align-items:flex-start}
+}
+
+
+/* v39 - poster johan perbarisan */
+.parade-card img{object-fit:cover; object-position:center top;}
+.parade-card > div{background:linear-gradient(180deg,#fff,#fff7ea)}
+.album-grid.four-col{}
+@media(min-width:1100px){.album-grid{grid-template-columns:repeat(4,1fr)} .album-card img{height:230px}}
