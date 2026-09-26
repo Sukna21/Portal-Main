@@ -105,3 +105,10 @@ Jika URL sebenar berbeza, tukar terus dalam `index.html`.
 - Tajuk hero utama ditukar kepada gaya mockup Pilihan 1.
 - Typography dibuat lebih bold, condensed dan sporty supaya lebih dekat dengan identiti visual SUKNA.
 - Badge tarikh dan susun atur hero turut dikemaskini supaya lebih premium dan kemas.
+
+
+## v42 — Google Drive Link Audit
+- Semua pautan galeri acara sukan diaudit semula terhadap folder Google Drive utama SUKNA21 SELANGOR pada 26 September 2026.
+- ID folder lama dalam Game diganti dengan ID folder semasa.
+- Pautan Perasmian, Majlis Penutup, Story dan Montaj disahkan masih sah.
+- Pautan penyampaian medal turut dikemas kini.
